@@ -8,4 +8,4 @@
 
 ## 1.0.2
 
-* fix 
+* fix example codes bugs when the platform is not web.
