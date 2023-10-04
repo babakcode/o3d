@@ -122,38 +122,76 @@ import 'package:model_viewer_plus/model_viewer_plus.dart';
 
 ### Creating a `O3D` widget
 
-```dart
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+```diff
+class _MyHomePageState extends State<MyHomePage> {
+  
+  // to control the animation
++ O3DController controller = O3DController();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Model Viewer')),
-        body: const ModelViewer(
-          backgroundColor: Color.fromARGB(0xFF, 0xEE, 0xEE, 0xEE),
-          src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-          alt: 'A 3D model of an astronaut',
-          ar: true,
-          autoRotate: true,
-          iosSrc: 'https://modelviewer.dev/shared-assets/models/Astronaut.usdz',
-          disableZoom: true,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+        actions: [
+          IconButton(
+              onPressed: () => 
++                 controller.cameraOrbit(20, 20, 5),
+              icon: const Icon(Icons.change_circle)),
+          IconButton(
+              onPressed: () =>
++                 controller.cameraTarget(1.2, 1, 4), 
+              icon: const Icon(Icons.change_circle_outlined)),
+        ],
       ),
++     body: O3D(
++       controller: controller,
++       src: 'assets/glb/jeff_johansen_idle.glb',
++     ),
     );
   }
 }
 ```
 
+### New feature is **controller**
+
+methods:
+
+**cameraTarget** :  
+> font size="2">Set the starting and/or subsequent point the camera orbits around.
+ Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".
+ Also supports units in centimeters ("cm") or millimeters ("mm").
+ A special value "auto" can be used, which sets the target to
+ the center of the model's bounding box in that dimension.
+ Any time this value changes from its initially configured value,
+ the camera will interpolate from its current position to the new value. </font>
+> controller.cameraTarget(20, 20, 5)
+
+**cameraOrbit**
+> font size="2">Set the starting and/or subsequent orbital position of the camera.
+You can control the azimuthal, theta, and polar, phi, angles (phi is measured down from the top),
+and the radius from the center of the model. Accepts values of the form "$theta $phi $radius",
+like "10deg 75deg 1.5m". Also supports units in radians ("rad") for angles and centimeters ("cm") or
+millimeters ("mm") for camera distance. Camera distance can also be set as a percentage ('%'),
+where 100% gives the model tight framing within any window based on all possible theta and phi values.
+Any time this value changes from its initially configured value, the camera will interpolate from its current
+position to the new value. Any value set to 'auto' will revert to the default. For camera-orbit, camera-target
+and field-of-view, parts of the property value can be configured with CSS-like functions. The CSS calc() function
+is supported for these values, as well as a specialized form of the env() function. You can use env(window-scroll-y)
+anywhere in the expression to get a number from 0-1 that corresponds to the current top-level scroll position of the
+current frame. For example, a value like "calc(30deg - env(window-scroll-y) * 60deg) 75deg 1.5m" cause the camera to
+orbit horizontally around the model as the user scrolls down the page. </font>
+> controller.cameraOrbit(1.2, 1, 4)
+
 ### Loading a bundled Flutter asset
 
 ```dart
-class MyApp extends StatelessWidget {
+body: O3D(
 // ...
   src: 'assets/MyModel.glb',
 // ...
-}
+),
 ```
 
 ### Loading a model from the file system
@@ -161,21 +199,21 @@ class MyApp extends StatelessWidget {
 This is not avaliable on Web.
 
 ```dart
-class MyApp extends StatelessWidget {
+body: O3D(
 // ...
   src: 'file:///path/to/MyModel.glb',
 // ...
-}
+),
 ```
 
 ### Loading a model from the web
 
 ```dart
-class MyApp extends StatelessWidget {
+body: O3D(
 // ...
   src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
 // ...
-}
+),
 ```
 
 Note that due to browsers' [CORS] security restrictions, the model file
@@ -183,46 +221,18 @@ Note that due to browsers' [CORS] security restrictions, the model file
 
 ## Frequently Asked Questions
 
-### Q: Why do I get the error `net::ERR_CLEARTEXT_NOT_PERMITTED`?
-
-You didn't configure your `AndroidManifest.xml` as per the installation
-instructions earlier in this document. See also [#7].
-
-### Q: Why does the example app just show a blank screen?
-
-**A:** Most likely, the platform browser version on your device or emulator is
-too old and does not support the features that Model Viewer needs.
-
-For example, the stock Chrome version on the Android 10 emulator is too old
-and will display a blank screen; it must be upgraded from the Play Store in
-order to use this package. (The stock Chrome version on the Android 11
-emulator works fine, however.) See [google/model-viewer#1109].
-
 ### Q: Why doesn't my 3D model load and/or render?
 
 **A:** There are several reasons why your model URL could fail to load and
 render:
 
-1. It might not be possible to load the model URL due to [CORS] security
-   restrictions. The server hosting the model file *must* send appropriate
-   CORS response headers for Model Viewer to be able to load the file.
-   See [google/model-viewer#1015].
-
-2. It might not be possible to parse the provided glTF or GLB file.
+1. It might not be possible to parse the provided glTF or GLB file.
    Some tools can produce invalid files when exporting glTF. Always
    run your model files through the [glTF Validator] to check for this.
 
-3. The platform browser might not support the features that Model Viewer
-   needs. See [google/model-viewer#1109].
-
-[#7]:                       https://github.com/drydart/model_viewer.dart/issues/7
 
 [CORS]:                     https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 
 [glTF Validator]:           https://github.khronos.org/glTF-Validator/
-
-[google/model-viewer#1015]: https://github.com/google/model-viewer/issues/1015
-
-[google/model-viewer#1109]: https://github.com/google/model-viewer/issues/1109
 
 [`android:usesCleartextTraffic`]: https://developer.android.com/guide/topics/manifest/application-element#usesCleartextTraffic
