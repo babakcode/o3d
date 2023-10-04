@@ -1,11 +1,11 @@
 name: o3d
 description: The Flutter 3D objects easy controller ( glb format )
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/babakcode/o3d
 topics:
   - "model"
   - "models3d"
-  - "models_3d"
+  - "models-3d"
   - "glb"
 screenshots:
   - description: 'Examples of the o3d package.'
