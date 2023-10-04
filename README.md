@@ -158,18 +158,18 @@ class _MyHomePageState extends State<MyHomePage> {
 methods:
 
 **cameraTarget** :    
-<font size="2">``According to web-based features https://modelviewer.dev/examples: Set the starting and/or subsequent point the camera orbits around.  
+> According to web-based features https://modelviewer.dev/examples: Set the starting and/or subsequent point the camera orbits around.  
 Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".  
 Also supports units in centimeters ("cm") or millimeters ("mm").  
 A special value "auto" can be used, which sets the target to  
 the center of the model's bounding box in that dimension.  
 Any time this value changes from its initially configured value,  
-the camera will interpolate from its current position to the new value.``</font>
-> controller.cameraTarget(20, 20, 5)
+the camera will interpolate from its current position to the new value.
+> **controller.cameraTarget(20, 20, 5)**
 
 
 **cameraOrbit**  
-<font size="2">`According to web-based features https://modelviewer.dev/examples:
+> According to web-based features https://modelviewer.dev/examples:
 Set the starting and/or subsequent orbital position of the camera.  
 You can control the azimuthal, theta, and polar, phi, angles (phi is measured down from the top),  
 and the radius from the center of the model. Accepts values of the form "$theta $phi $radius",  
@@ -182,9 +182,9 @@ and field-of-view, parts of the property value can be configured with CSS-like f
 is supported for these values, as well as a specialized form of the env() function. You can use env(window-scroll-y)  
 anywhere in the expression to get a number from 0-1 that corresponds to the current top-level scroll position of the  
 current frame. For example, a value like "calc(30deg - env(window-scroll-y) * 60deg) 75deg 1.5m" cause the camera to  
-orbit horizontally around the model as the user scrolls down the page.`</font>
+orbit horizontally around the model as the user scrolls down the page.
 
-> controller.cameraOrbit(1.2, 1, 4)
+> **controller.cameraOrbit(1.2, 1, 4)**
 
 **other methods will be added as soon as possible.**
 
