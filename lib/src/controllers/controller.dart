@@ -12,4 +12,11 @@ class O3DController {
     _dataSource = source;
   }
 
+  void orbit(double theta,double phi,double radius){
+    _dataSource.cameraOrbit(theta, phi, radius);
+  }
+
+  void cameraTarget(double x,double y,double z){
+    _dataSource.cameraTarget(x, y, z);
+  }
 }

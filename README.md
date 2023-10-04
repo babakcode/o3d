@@ -33,7 +33,7 @@ If [Google Play Services for AR (ARCore, `com.google.ar.core`)](https://play.goo
 
 ```yaml
 dependencies:
-  model_viewer_plus: ^1.6.0
+  o3d: any
 ```
 
 ### `AndroidManifest.xml` (Android 9+ only)
@@ -84,14 +84,12 @@ Modify the `<head>` tag of your `web/index.html` to load the JavaScript, like so
 
   <!-- Other stuff -->
 
-  <script type="module" src="./assets/packages/model_viewer_plus/assets/model-viewer.min.js" defer></script>
+   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js" defer></script>
 </head>
 ```
 
 `./assets/packages/model_viewer_plus/assets/model-viewer.min.js` will use the default js file which is included in this package's asset. The [official site](https://modelviewer.dev) uses unpkg, by using `https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js`, you are using the latest version of `<model-viewier>`. You may replace the
 value of `src` attribute with another CDN mirror's URL. But please notice that our model-viewer-plus maybe not able to keep up with the `<model-viewier>`'s latest version.
-
-According to [#44](https://github.com/omchiii/model_viewer_plus.dart/issues/44), the render quality maybe low on some mobile devices. Please consider adding `<meta name="viewport" content="width=device-width, initial-scale=1" />` to the `<head>` of your `web/index.html`.
 
 ## Features
 
@@ -117,7 +115,7 @@ According to [#44](https://github.com/omchiii/model_viewer_plus.dart/issues/44),
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 ```
 
-### Creating a `ModelViewer` widget
+### Creating a `O3D` widget
 
 ```dart
 class MyApp extends StatelessWidget {

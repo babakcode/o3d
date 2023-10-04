@@ -1,15 +1,17 @@
 
 import 'dart:js';
-import '../../entities/controller_entity.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../interfaces/o3d_controller_interface.dart';
 
 class O3dImp implements O3DControllerInterface{
 
-  final ControllerEntity? entity;
-  O3dImp([this.entity]);
+
+  final WebViewController? webViewController;
+  O3dImp([this.webViewController]);
 
   @override
   void cameraOrbit(double theta, double phi, double radius) {
+    print('callMethod("cameraOrbit');
     context.callMethod("cameraOrbit", [theta, phi, radius]);
   }
 
