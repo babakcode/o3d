@@ -32,7 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   // to control the animation
   O3DController controller = O3DController();
 
@@ -44,12 +43,10 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: [
           IconButton(
-              onPressed: () =>
-                  controller.cameraOrbit(20, 20, 5),
+              onPressed: () => controller.cameraOrbit(20, 20, 5),
               icon: const Icon(Icons.change_circle)),
           IconButton(
-              onPressed: () =>
-                  controller.cameraTarget(1.2, 1, 4),
+              onPressed: () => controller.cameraTarget(1.2, 1, 4),
               icon: const Icon(Icons.change_circle_outlined)),
         ],
       ),
