@@ -631,7 +631,6 @@ class _O3DState extends State<O3D> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     id = widget.id ?? utils.generateId;
     relatedJs = widget.relatedJs ?? "";

@@ -8,7 +8,7 @@ class O3dDataSource implements O3DControllerInterface {
 
   final WebViewController? webViewController;
 
-  O3dDataSource([this.webViewController]) : o3dImp = O3dImp();
+  O3dDataSource([this.webViewController]) : o3dImp = O3dImp(webViewController);
 
   @override
   void cameraOrbit(double theta, double phi, double radius) =>
