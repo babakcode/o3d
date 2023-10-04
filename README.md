@@ -11,11 +11,13 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
 ## Screenshot
 
-<img src="https://assets.babakcode.com/flutter/packages/o3d/s1.gif" alt="o3d gif" width="200" loading="lazy"/>
 
-|                                                 old man                                                  |                                                                    Astronaut                                                                    |
-|:--------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------:|
-| <img src="https://assets.babakcode.com/flutter/packages/o3d/s2.png" alt="o3d screenshot 1" width="200"/> | <img src="https://raw.githubusercontent.com/omchiii/model_viewer_plus.dart/master/example/flutter_01.png" alt="o3d screenshot 1" width="200"/>  |
+
+<img src="https://assets.babakcode.com/flutter/packages/o3d/s1.gif" alt="o3d gif" width="100%" loading="lazy"/>  
+
+|                                                  old man                                                  |                                                                   Astronaut                                                                    |  
+|:---------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|  
+| <img src="https://assets.babakcode.com/flutter/packages/o3d/s2.png" alt="o3d screenshot 1" width="100%"/> | <img src="https://raw.githubusercontent.com/omchiii/model_viewer_plus.dart/master/example/flutter_01.png" alt="o3d screenshot 1" width="40%"/> |  
 
 ![o3d screenshot 1](https://raw.githubusercontent.com/omchiii/model_viewer_plus.dart/master/example/flutter_02.png)
 
