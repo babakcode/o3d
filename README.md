@@ -157,7 +157,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
 methods:
 
-**cameraTarget** :    
+1. cameraTarget:
+
+use **controller.cameraTarget(20, 20, 5)**
+
 > According to web-based features https://modelviewer.dev/examples: Set the starting and/or subsequent point the camera orbits around.  
 Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".  
 Also supports units in centimeters ("cm") or millimeters ("mm").  
@@ -165,10 +168,13 @@ A special value "auto" can be used, which sets the target to
 the center of the model's bounding box in that dimension.  
 Any time this value changes from its initially configured value,  
 the camera will interpolate from its current position to the new value.
-> **controller.cameraTarget(20, 20, 5)**
 
 
-**cameraOrbit**  
+
+2. cameraOrbit:
+
+use **controller.cameraOrbit(1.2, 1, 4)**
+
 > According to web-based features https://modelviewer.dev/examples:
 Set the starting and/or subsequent orbital position of the camera.  
 You can control the azimuthal, theta, and polar, phi, angles (phi is measured down from the top),  
@@ -184,9 +190,7 @@ anywhere in the expression to get a number from 0-1 that corresponds to the curr
 current frame. For example, a value like "calc(30deg - env(window-scroll-y) * 60deg) 75deg 1.5m" cause the camera to  
 orbit horizontally around the model as the user scrolls down the page.
 
-> **controller.cameraOrbit(1.2, 1, 4)**
-
-**other methods will be added as soon as possible.**
+***other methods will be added as soon as possible.***
 
 ### Loading a bundled Flutter asset
 
