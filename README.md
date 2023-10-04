@@ -11,8 +11,6 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
 ## Screenshot
 
-
-
 <img src="https://assets.babakcode.com/flutter/packages/o3d/s1.gif" alt="o3d gif" width="100%" loading="lazy"/>  
 
 |                                                  old man                                                  |                                                                   Astronaut                                                                    |  
@@ -24,7 +22,7 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 ## Compatibility
 
 - Android
-- iOS (AR View may not avaliable on iOS 16+)
+- iOS (AR View may not available on iOS 16+)
 - Web, with [a recent system browser version](https://modelviewer.dev/#section-browser-support).
 
 ## Notes

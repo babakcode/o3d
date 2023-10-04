@@ -3,9 +3,9 @@ description: The Flutter 3D objects easy controller ( glb format )
 version: 1.0.0
 homepage: https://github.com/babakcode/o3d
 topics:
-  - model-viewer
-  - model
-  -
+  - "model"
+  - "3d Models"
+  - "3d_models"
 screenshots:
   - description: 'Examples of the o3d package.'
     path: ./example/screenshots/s1.png
