@@ -1,4 +1,3 @@
-
 enum Loading { auto, lazy, eager }
 
 enum Reveal { auto, interaction, manual }

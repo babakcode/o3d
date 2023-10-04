@@ -1,17 +1,13 @@
-
-import 'dart:js';
+import '../fake/js_fake.dart' if (dart.library.js) 'dart:js';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../interfaces/o3d_controller_interface.dart';
 
-class O3dImp implements O3DControllerInterface{
-
-
+class O3dImp implements O3DControllerInterface {
   final WebViewController? webViewController;
   O3dImp([this.webViewController]);
 
   @override
   void cameraOrbit(double theta, double phi, double radius) {
-    print('callMethod("cameraOrbit');
     context.callMethod("cameraOrbit", [theta, phi, radius]);
   }
 
@@ -24,5 +20,4 @@ class O3dImp implements O3DControllerInterface{
   void customJsCode(String code) {
     context.callMethod("customEvaluate", [code]);
   }
-
 }

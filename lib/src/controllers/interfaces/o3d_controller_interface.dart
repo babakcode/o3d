@@ -1,6 +1,4 @@
-
-abstract class O3DControllerInterface{
-
+abstract class O3DControllerInterface {
   /// [customJsCode]
   /// See examples on https://modelviewer.dev/examples then add your desired
   /// javascript code
@@ -21,7 +19,6 @@ abstract class O3DControllerInterface{
   /// current frame. For example, a value like "calc(30deg - env(window-scroll-y) * 60deg) 75deg 1.5m" cause the camera to
   /// orbit horizontally around the model as the user scrolls down the page.
   void cameraOrbit(double theta, double phi, double radius);
-
 
   /// [cameraTarget] function
   /// Set the starting and/or subsequent point the camera orbits around.
