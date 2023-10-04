@@ -1,7 +1,15 @@
 name: o3d
-description: A new Flutter project.
+description: The Flutter 3D objects easy controller ( glb format )
 version: 0.0.1
-homepage:
+homepage: https://github.com/babakcode/o3d
+topics:
+  - model-viewer
+  - model
+
+platforms:
+  android:
+  ios:
+  web:
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
