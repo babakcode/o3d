@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 import 'package:o3d/src/controllers/repositories/o3d_datasource_repository.dart';
+import 'package:o3d/src/entities/camera_orbit.dart';
 import 'package:o3d/src/entities/controller_entity.dart';
 import 'package:o3d/src/utils/utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../entities/camera_target.dart';
 
 part '../controllers/controller.dart';
 
@@ -343,7 +346,7 @@ class O3D extends StatefulWidget {
   /// to orbit horizontally around the model as the user scrolls down the page.
   ///
   /// `<model-viewer>` official document: https://modelviewer.dev/docs/#entrydocs-stagingandcameras-attributes-cameraOrbit
-  final String? cameraOrbit;
+  final CameraOrbit? cameraOrbit;
 
   /// Set the starting and/or subsequent point the camera orbits around.
   /// Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".
@@ -354,7 +357,7 @@ class O3D extends StatefulWidget {
   /// current position to the new value.
   ///
   /// `<model-viewer>` official document: https://modelviewer.dev/docs/#entrydocs-stagingandcameras-attributes-cameraTarget
-  final String? cameraTarget;
+  final CameraTarget? cameraTarget;
 
   /// Used to configure the vertical field of view of the camera. Accepts
   /// values in both degrees and radians (e.g., "30deg" or "0.5rad"). Accepts
@@ -667,8 +670,8 @@ class _O3DState extends State<O3D> {
       interactionPrompt: widget.interactionPrompt,
       interactionPromptStyle: widget.interactionPromptStyle,
       interactionPromptThreshold: widget.interactionPromptThreshold,
-      cameraOrbit: widget.cameraOrbit,
-      cameraTarget: widget.cameraTarget,
+      cameraOrbit: widget.cameraOrbit?.toString(),
+      cameraTarget: widget.cameraTarget?.toString(),
       fieldOfView: widget.fieldOfView,
       maxCameraOrbit: widget.maxCameraOrbit,
       minCameraOrbit: widget.minCameraOrbit,
