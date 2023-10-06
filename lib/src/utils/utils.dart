@@ -8,8 +8,8 @@ class Utils {
 
   String relatedJs({required String id}) =>
       """var mainModelViewer = document.querySelector('#$id');
-cameraOrbit = (a, b, c) => {mainModelViewer.cameraOrbit = `\${a}deg \${b}deg \${c}mm`}
-cameraTarget = (x, y, z) => {mainModelViewer.cameraTarget = `\${x}mm \${y}mm \${z}mm`}
+cameraOrbit = (a, b, c) => {mainModelViewer.cameraOrbit = `\${a}deg \${b}deg \${c}m`}
+cameraTarget = (x, y, z) => {mainModelViewer.cameraTarget = `\${x}m \${y}m \${z}m`}
 customEvaluate = (code) => { eval(code) }
 """;
 }

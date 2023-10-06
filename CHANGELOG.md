@@ -6,6 +6,7 @@
 
 * Change the const to the var
 
-## 1.0.2
+## 1.1.0
 
-* fix example codes bugs when the platform is not web.
+* Fixed example codes bugs when the platform is not web. 
+* Changed the millimeter to the meter in the camera target and orbit
