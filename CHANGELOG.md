@@ -12,3 +12,6 @@
 * Changed the millimeter to the meter in the camera target and orbit
 * Added export camera target in main page of dependency
 
+## 1.2.0
+
+* supports flutter 3.13.*
