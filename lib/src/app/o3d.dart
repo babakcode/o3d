@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
+import 'package:o3d/src/controllers/interfaces/o3d_controller_interface.dart';
 import 'package:o3d/src/controllers/repositories/o3d_datasource_repository.dart';
 import 'package:o3d/src/entities/camera_orbit.dart';
 import 'package:o3d/src/entities/controller_entity.dart';
@@ -695,7 +696,7 @@ class _O3DState extends State<O3D> {
       relatedCss: widget.relatedCss,
       relatedJs: relatedJs,
       id: id,
-      debugLogging: widget.debugLogging,
+      debugLogging: widget.debugLogging ?? false,
       // overwriteNodeValidatorBuilder: widget.overwriteNodeValidatorBuilder,
       javascriptChannels: widget.javascriptChannels,
       onWebViewCreated: (data) {
