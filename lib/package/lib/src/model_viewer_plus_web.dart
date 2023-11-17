@@ -20,8 +20,8 @@ class ModelViewerState extends State<ModelViewer> {
 
   /// To generate the HTML code for using the model viewer.
   Future<void> generateModelViewerHtml() async {
-    final htmlTemplate = await rootBundle
-        .loadString('packages/o3d/assets/template.html');
+    final htmlTemplate =
+        await rootBundle.loadString('packages/o3d/assets/template.html');
 
     // allow to use elements
     final NodeValidator validator =

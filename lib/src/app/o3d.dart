@@ -646,7 +646,6 @@ class _O3DState extends State<O3D> {
 
   @override
   Widget build(BuildContext context) {
-
     return ModelViewer(
       src: widget.src,
       backgroundColor: widget.backgroundColor,
