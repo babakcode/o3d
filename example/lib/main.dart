@@ -52,7 +52,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: O3D(
         controller: controller,
-        src: 'assets/glb/jeff_johansen_idle.glb',
+        src:
+        //'https://assets.babakcode.com/flutter/projects/ui_3d_flutter/'
+            'assets/glb/'
+            'jeff_johansen_idle.glb',
       ),
     );
   }

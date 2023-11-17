@@ -15,3 +15,8 @@
 ## 1.2.0
 
 * supports flutter 3.13.*
+
+## 1.3.00
+
+* ## fixed 
+* web release issue

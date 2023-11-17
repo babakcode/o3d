@@ -1,93 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:o3d/o3d.dart';
-import 'package:o3d/src/app/enums.dart';
-import 'package:o3d/src/controllers/interfaces/o3d_controller_interface.dart';
-import 'package:o3d/src/controllers/repositories/o3d_datasource_repository.dart';
-import 'package:o3d/src/entities/camera_orbit.dart';
-import 'package:o3d/src/entities/controller_entity.dart';
-import 'package:o3d/src/utils/utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../../package/lib/src/model_viewer_plus.dart';
-import '../entities/camera_target.dart';
 
-part '../controllers/controller.dart';
+import 'model_viewer_plus_stub.dart'
+    if (dart.library.io) 'model_viewer_plus_mobile.dart'
+    if (dart.library.js) 'model_viewer_plus_web.dart';
+import 'shim/dart_html_fake.dart' if (dart.library.html) 'dart:html';
 
-class O3D extends StatefulWidget {
-  const O3D(
-      {this.controller,
-      required this.src,
-      this.backgroundColor = Colors.transparent,
-      this.alt,
-      this.poster,
-      this.loading,
-      this.reveal,
-      this.withCredentials,
-      this.ar,
-      this.arModes,
-      this.arScale,
-      this.arPlacement,
-      this.iosSrc,
-      this.xrEnvironment,
-      this.cameraControls = true,
-      this.disablePan,
-      this.disableTap,
-      this.touchAction,
-      this.disableZoom,
-      this.orbitSensitivity,
-      this.autoRotate,
-      this.autoRotateDelay,
-      this.rotationPerSecond,
-      this.interactionPrompt,
-      this.interactionPromptStyle,
-      this.interactionPromptThreshold,
-      this.cameraOrbit,
-      this.cameraTarget,
-      this.fieldOfView,
-      this.maxCameraOrbit,
-      this.minCameraOrbit,
-      this.maxFieldOfView,
-      this.minFieldOfView,
-      this.interpolationDecay,
-      this.skyboxImage,
-      this.environmentImage,
-      this.exposure,
-      this.shadowIntensity,
-      this.shadowSoftness,
-      this.animationName,
-      this.animationCrossfadeDuration,
-      this.autoPlay,
-      this.variantName,
-      this.orientation,
-      this.scale,
-      this.minHotspotOpacity,
-      this.maxHotspotOpacity,
-      this.innerModelViewerHtml,
-      this.relatedCss,
-      this.relatedJs,
-      this.id,
-      this.debugLogging = false,
-      this.javascriptChannels,
-      this.onWebViewCreated,
-      super.key});
+/// Flutter widget for rendering interactive 3D models.
+class ModelViewer extends StatefulWidget {
+  const ModelViewer({
+    required this.src,
+    this.backgroundColor = Colors.transparent,
+    this.alt,
+    this.poster,
+    this.loading,
+    this.reveal,
+    this.withCredentials,
+    this.ar,
+    this.arModes,
+    this.arScale,
+    this.arPlacement,
+    this.iosSrc,
+    this.xrEnvironment,
+    this.cameraControls = true,
+    this.disablePan,
+    this.disableTap,
+    this.touchAction,
+    this.disableZoom,
+    this.orbitSensitivity,
+    this.autoRotate,
+    this.autoRotateDelay,
+    this.rotationPerSecond,
+    this.interactionPrompt,
+    this.interactionPromptStyle,
+    this.interactionPromptThreshold,
+    this.cameraOrbit,
+    this.cameraTarget,
+    this.fieldOfView,
+    this.maxCameraOrbit,
+    this.minCameraOrbit,
+    this.maxFieldOfView,
+    this.minFieldOfView,
+    this.interpolationDecay,
+    this.skyboxImage,
+    this.environmentImage,
+    this.exposure,
+    this.shadowIntensity,
+    this.shadowSoftness,
+    this.animationName,
+    this.animationCrossfadeDuration,
+    this.autoPlay,
+    this.variantName,
+    this.orientation,
+    this.scale,
+    // this.arStatus,
+    // this.arTracking,
+    this.minHotspotOpacity,
+    this.maxHotspotOpacity,
+    this.innerModelViewerHtml,
+    this.relatedCss,
+    this.relatedJs,
+    this.id,
+    this.debugLogging = true,
+    this.overwriteNodeValidatorBuilder,
+    this.javascriptChannels,
+    this.onWebViewCreated,
+    super.key,
+  });
 
   // Loading Attributes
-
-  /// The URL or path to the 3D model. This parameter is required.
-  /// Only glTF/GLB models are supported.
-  ///
-  /// The parameter value must conform to the following:
-  ///
-  /// - `http://` and `https://` for HTTP(S) URLs
-  ///   (for example, `https://modelviewer.dev/shared-assets/models/Astronaut.glb`)
-  ///
-  /// - `file://` for local files
-  ///   (NOT AVAILABLE in Web)
-  ///
-  /// - a relative pathname for Flutter app assets
-  ///   (for example, `assets/MyModel.glb`)
-  ///
-  /// `<model-viewer>` official document: https://modelviewer.dev/docs/#entrydocs-loading-attributes-src
-  final O3DController? controller;
 
   /// The URL or path to the 3D model. This parameter is required.
   /// Only glTF/GLB models are supported.
@@ -348,7 +330,7 @@ class O3D extends StatefulWidget {
   /// to orbit horizontally around the model as the user scrolls down the page.
   ///
   /// `<model-viewer>` official document: https://modelviewer.dev/docs/#entrydocs-stagingandcameras-attributes-cameraOrbit
-  final CameraOrbit? cameraOrbit;
+  final String? cameraOrbit;
 
   /// Set the starting and/or subsequent point the camera orbits around.
   /// Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".
@@ -359,7 +341,7 @@ class O3D extends StatefulWidget {
   /// current position to the new value.
   ///
   /// `<model-viewer>` official document: https://modelviewer.dev/docs/#entrydocs-stagingandcameras-attributes-cameraTarget
-  final CameraTarget? cameraTarget;
+  final String? cameraTarget;
 
   /// Used to configure the vertical field of view of the camera. Accepts
   /// values in both degrees and radians (e.g., "30deg" or "0.5rad"). Accepts
@@ -613,7 +595,7 @@ class O3D extends StatefulWidget {
   ///
   /// See also: [NodeValidatorBuilder](https://api.flutter.dev/flutter/dart-html/NodeValidatorBuilder-class.html)
   ///
-  // final NodeValidatorBuilder? overwriteNodeValidatorBuilder;
+  final NodeValidatorBuilder? overwriteNodeValidatorBuilder;
 
   /// Passthrough to `javascriptChannels` in the underlying `WebView`.
   final Set<JavascriptChannel>? javascriptChannels;
@@ -624,88 +606,5 @@ class O3D extends StatefulWidget {
   final ValueChanged<WebViewController>? onWebViewCreated;
 
   @override
-  State<O3D> createState() => _O3DState();
-}
-
-class _O3DState extends State<O3D> {
-  late String relatedJs;
-  late String id;
-
-  Utils utils = Utils();
-  late O3DController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    id = widget.id ?? utils.generateId;
-    relatedJs = widget.relatedJs ?? "";
-    relatedJs = utils.relatedJs(id: id) + relatedJs;
-    controller = widget.controller ?? O3DController();
-    controller._init(ControllerEntity(id: id));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    return ModelViewer(
-      src: widget.src,
-      backgroundColor: widget.backgroundColor,
-      alt: widget.alt,
-      poster: widget.poster,
-      loading: widget.loading,
-      reveal: widget.reveal,
-      withCredentials: widget.withCredentials,
-      ar: widget.ar,
-      arModes: widget.arModes,
-      arScale: widget.arScale,
-      arPlacement: widget.arPlacement,
-      iosSrc: widget.iosSrc,
-      xrEnvironment: widget.xrEnvironment,
-      cameraControls: widget.cameraControls,
-      disablePan: widget.disablePan,
-      disableTap: widget.disableTap,
-      touchAction: widget.touchAction,
-      disableZoom: widget.disableZoom,
-      orbitSensitivity: widget.orbitSensitivity,
-      autoRotate: widget.autoRotate,
-      autoRotateDelay: widget.autoRotateDelay,
-      rotationPerSecond: widget.rotationPerSecond,
-      interactionPrompt: widget.interactionPrompt,
-      interactionPromptStyle: widget.interactionPromptStyle,
-      interactionPromptThreshold: widget.interactionPromptThreshold,
-      cameraOrbit: widget.cameraOrbit?.toString(),
-      cameraTarget: widget.cameraTarget?.toString(),
-      fieldOfView: widget.fieldOfView,
-      maxCameraOrbit: widget.maxCameraOrbit,
-      minCameraOrbit: widget.minCameraOrbit,
-      maxFieldOfView: widget.maxFieldOfView,
-      minFieldOfView: widget.minFieldOfView,
-      interpolationDecay: widget.interpolationDecay,
-      skyboxImage: widget.skyboxImage,
-      environmentImage: widget.environmentImage,
-      exposure: widget.exposure,
-      shadowIntensity: widget.shadowIntensity,
-      shadowSoftness: widget.shadowSoftness,
-      animationName: widget.animationName,
-      animationCrossfadeDuration: widget.animationCrossfadeDuration,
-      autoPlay: widget.autoPlay,
-      variantName: widget.variantName,
-      orientation: widget.orientation,
-      scale: widget.scale,
-      minHotspotOpacity: widget.minHotspotOpacity,
-      maxHotspotOpacity: widget.maxHotspotOpacity,
-      innerModelViewerHtml: widget.innerModelViewerHtml,
-      relatedCss: widget.relatedCss,
-      relatedJs: relatedJs,
-      id: id,
-      debugLogging: widget.debugLogging ?? false,
-      // overwriteNodeValidatorBuilder: widget.overwriteNodeValidatorBuilder,
-      javascriptChannels: widget.javascriptChannels,
-      onWebViewCreated: (data) {
-        widget.onWebViewCreated?.call(data);
-        controller._controllerEntity.webViewController = data;
-        controller._initDataSource = O3dDataSource(data);
-      },
-    );
-  }
+  State<ModelViewer> createState() => ModelViewerState();
 }
