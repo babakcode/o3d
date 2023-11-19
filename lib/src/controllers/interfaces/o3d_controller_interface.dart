@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 abstract class O3DControllerInterface {
   /// [customJsCode]
   /// See examples on https://modelviewer.dev/examples then add your desired
@@ -29,6 +31,22 @@ abstract class O3DControllerInterface {
   /// Any time this value changes from its initially configured value,
   /// the camera will interpolate from its current position to the new value.
   void cameraTarget(double x, double y, double z);
+
+  /// [logger] for testing package in release mode
+  ValueChanged<Object>? logger;
+
+  /// [animationName] for setting package animation name
+  /// `setter` function
+  set animationName(String? name);
+
+  /// [cameraControls] for setting control on the camera or setting on
+  /// default camera position
+  /// `setter` func
+  set cameraControls(bool? set);
+
+  /// [autoRotate] for camera rotation
+  /// `setter` func
+  set autoRotate(bool? set);
 
   /// others will be added
 }

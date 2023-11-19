@@ -34,6 +34,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   // to control the animation
   O3DController controller = O3DController();
+  List<String> logs = [];
+  bool cameraControls = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +50,18 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
               onPressed: () => controller.cameraTarget(1.2, 1, 4),
               icon: const Icon(Icons.change_circle_outlined)),
+          IconButton(
+              onPressed: () => {cameraControls = !cameraControls, controller.cameraControls = cameraControls},
+              icon: const Icon(Icons.camera_alt_outlined)),
         ],
       ),
       body: O3D(
         controller: controller,
         src:
-            //'https://assets.babakcode.com/flutter/projects/ui_3d_flutter/'
-            'assets/glb/'
-            'jeff_johansen_idle.glb',
+          'https://modelviewer.dev/shared-assets/models/Astronaut.glb'
+          //   //'https://assets.babakcode.com/flutter/projects/ui_3d_flutter/'
+          //   'assets/glb/'
+          //   'jeff_johansen_idle.glb',
       ),
     );
   }

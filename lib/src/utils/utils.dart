@@ -11,5 +11,8 @@ class Utils {
 cameraOrbit = (a, b, c) => {mainModelViewer.cameraOrbit = `\${a}deg \${b}deg \${c}m`}
 cameraTarget = (x, y, z) => {mainModelViewer.cameraTarget = `\${x}m \${y}m \${z}m`}
 customEvaluate = (code) => { eval(code) }
+animationName = (set) => { mainModelViewer.setAttribute('animation-name', set); }
+autoRotate = (set) => { mainModelViewer.setAttribute('auto-rotate', set ?? false); }
+cameraControls = (set) => { mainModelViewer.setAttribute('camera-controls', set ?? false); }
 """;
 }

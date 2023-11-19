@@ -79,8 +79,10 @@ abstract class HTMLBuilder {
       htmlTemplate = htmlTemplate.replaceFirst('/* other-css */', relatedCss);
     }
 
-    if (!src.trim().startsWith("http")) {
-      src = kReleaseMode || kProfileMode ? 'assets/$src' : src;
+    if(kIsWeb){
+      if (!src.trim().startsWith("http")) {
+        src = kReleaseMode || kProfileMode ? 'assets/$src' : src;
+      }
     }
 
     final modelViewerHtml = StringBuffer()
@@ -154,7 +156,7 @@ abstract class HTMLBuilder {
     }
     // ios-src
     if (iosSrc != null) {
-      if (!iosSrc.trim().startsWith("http")) {
+      if (!iosSrc.trim().startsWith("http") && kIsWeb) {
         iosSrc = kReleaseMode || kProfileMode ? 'assets/$iosSrc' : iosSrc;
       }
       modelViewerHtml.write(' ios-src="${htmlEscape.convert(iosSrc)}"');

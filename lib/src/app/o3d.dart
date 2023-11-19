@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:o3d/o3d.dart';
-import 'package:o3d/src/app/enums.dart';
 import 'package:o3d/src/controllers/interfaces/o3d_controller_interface.dart';
 import 'package:o3d/src/controllers/repositories/o3d_datasource_repository.dart';
-import 'package:o3d/src/entities/camera_orbit.dart';
 import 'package:o3d/src/entities/controller_entity.dart';
 import 'package:o3d/src/utils/utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../../package/lib/src/model_viewer_plus.dart';
-import '../entities/camera_target.dart';
+
+import 'model_viewer/o3d_model_viewer.dart';
 
 part '../controllers/controller.dart';
 
@@ -72,21 +70,7 @@ class O3D extends StatefulWidget {
 
   // Loading Attributes
 
-  /// The URL or path to the 3D model. This parameter is required.
-  /// Only glTF/GLB models are supported.
-  ///
-  /// The parameter value must conform to the following:
-  ///
-  /// - `http://` and `https://` for HTTP(S) URLs
-  ///   (for example, `https://modelviewer.dev/shared-assets/models/Astronaut.glb`)
-  ///
-  /// - `file://` for local files
-  ///   (NOT AVAILABLE in Web)
-  ///
-  /// - a relative pathname for Flutter app assets
-  ///   (for example, `assets/MyModel.glb`)
-  ///
-  /// `<model-viewer>` official document: https://modelviewer.dev/docs/#entrydocs-loading-attributes-src
+  /// Package Controller
   final O3DController? controller;
 
   /// The URL or path to the 3D model. This parameter is required.
@@ -508,7 +492,7 @@ class O3D extends StatefulWidget {
 
   // CSS Styles
 
-  /// The backgroundColor of the [ModelViewer]'s WebView.
+  /// The backgroundColor of the [O3DModelViewer]'s WebView.
   /// Defaults to [Colors.transparent].
   final Color backgroundColor;
 
@@ -569,7 +553,7 @@ class O3D extends StatefulWidget {
   /// Custom JS
   final String? relatedJs;
 
-  /// The id of the [ModelViewer] in HTML.
+  /// The id of the [O3DModelViewer] in HTML.
   final String? id;
 
   /// If false, HTMLBuilder will not print debug logs.
@@ -646,8 +630,9 @@ class _O3DState extends State<O3D> {
 
   @override
   Widget build(BuildContext context) {
-    return ModelViewer(
+    return O3DModelViewer(
       src: widget.src,
+      controller: widget.controller,
       backgroundColor: widget.backgroundColor,
       alt: widget.alt,
       poster: widget.poster,
@@ -703,7 +688,7 @@ class _O3DState extends State<O3D> {
       onWebViewCreated: (data) {
         widget.onWebViewCreated?.call(data);
         controller._controllerEntity.webViewController = data;
-        controller._initDataSource = O3dDataSource(data);
+        controller._initDataSource = O3dDataSource(webViewController: data);
       },
     );
   }

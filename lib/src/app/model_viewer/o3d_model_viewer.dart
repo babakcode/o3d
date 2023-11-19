@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:o3d/o3d.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'model_viewer_plus_stub.dart'
-    if (dart.library.io) 'model_viewer_plus_mobile.dart'
-    if (dart.library.js) 'model_viewer_plus_web.dart';
-import 'shim/dart_html_fake.dart' if (dart.library.html) 'dart:html';
+import '../../../src/app/model_viewer/model_viewer_plus_stub.dart'
+if (dart.library.io) 'model_viewer_plus_mobile.dart'
+if (dart.library.js) 'model_viewer_plus_web.dart';
+import '../fake/dart_html_fake.dart' if (dart.library.html) 'dart:html';
 
 /// Flutter widget for rendering interactive 3D models.
-class ModelViewer extends StatefulWidget {
-  const ModelViewer({
+class O3DModelViewer extends StatefulWidget {
+  const O3DModelViewer({
+    this.controller,
     required this.src,
     this.backgroundColor = Colors.transparent,
     this.alt,
@@ -70,6 +71,9 @@ class ModelViewer extends StatefulWidget {
   });
 
   // Loading Attributes
+
+  /// Package Controller
+  final O3DController? controller;
 
   /// The URL or path to the 3D model. This parameter is required.
   /// Only glTF/GLB models are supported.
@@ -490,7 +494,7 @@ class ModelViewer extends StatefulWidget {
 
   // CSS Styles
 
-  /// The backgroundColor of the [ModelViewer]'s WebView.
+  /// The backgroundColor of the [O3DModelViewer]'s WebView.
   /// Defaults to [Colors.transparent].
   final Color backgroundColor;
 
@@ -551,7 +555,7 @@ class ModelViewer extends StatefulWidget {
   /// Custom JS
   final String? relatedJs;
 
-  /// The id of the [ModelViewer] in HTML.
+  /// The id of the [O3DModelViewer] in HTML.
   final String? id;
 
   /// If false, HTMLBuilder will not print debug logs.
@@ -606,5 +610,5 @@ class ModelViewer extends StatefulWidget {
   final ValueChanged<WebViewController>? onWebViewCreated;
 
   @override
-  State<ModelViewer> createState() => ModelViewerState();
+  State<O3DModelViewer> createState() => ModelViewerState();
 }

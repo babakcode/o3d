@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'html_builder.dart';
-import 'model_viewer_plus.dart';
-import 'shim/dart_html_fake.dart' if (dart.library.html) 'dart:html';
-import 'shim/dart_ui_fake.dart' if (dart.library.html) 'dart:ui_web' as ui_web;
+import '../fake/dart_html_fake.dart' if (dart.library.html) 'dart:html';
+import '../fake/dart_ui_fake.dart' if (dart.library.html) 'dart:ui_web' as ui_web;
+import 'o3d_model_viewer.dart';
 
-class ModelViewerState extends State<ModelViewer> {
+class ModelViewerState extends State<O3DModelViewer> {
   bool _isLoading = true;
   final String _uniqueViewType = UniqueKey().toString();
 

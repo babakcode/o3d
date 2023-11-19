@@ -8,6 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart' as p_p;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart'
@@ -16,9 +17,9 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart'
     as ios;
 
 import 'html_builder.dart';
-import 'model_viewer_plus.dart';
+import 'o3d_model_viewer.dart';
 
-class ModelViewerState extends State<ModelViewer> {
+class ModelViewerState extends State<O3DModelViewer> {
   HttpServer? _proxy;
   WebViewController? _webViewController;
   late String _proxyURL;
@@ -26,7 +27,17 @@ class ModelViewerState extends State<ModelViewer> {
   @override
   void initState() {
     super.initState();
-    unawaited(_initProxy().then((_) => _initController()));
+    unawaited(
+      _initProxy().then(
+        (_) => _initController()
+          ..catchError(
+            (e) =>
+                widget.controller?.logger?.call('init control error: $e'),
+          ),
+      )..catchError(
+          (e) => widget.controller?.logger?.call('init proxy error $e'),
+        ),
+    );
   }
 
   @override
@@ -48,6 +59,7 @@ class ModelViewerState extends State<ModelViewer> {
       );
     }
     return WebViewWidget(
+      // onWebViewCreated: (controller) => _webViewController = controller,
       controller: _webViewController!,
       gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{
         Factory<OneSequenceGestureRecognizer>(EagerGestureRecognizer.new),
@@ -134,6 +146,9 @@ class ModelViewerState extends State<ModelViewer> {
         WebViewController.fromPlatformCreationParams(params);
     await webViewController.setBackgroundColor(Colors.transparent);
     await webViewController.setJavaScriptMode(JavaScriptMode.unrestricted);
+
+    widget.controller?.logger?.call("init config");
+
     await webViewController.setNavigationDelegate(
       NavigationDelegate(
         onNavigationRequest: (request) async {
@@ -219,85 +234,88 @@ class ModelViewerState extends State<ModelViewer> {
   }
 
   Future<void> _initProxy() async {
-    String src = widget.src;
+    try {
+      String src = widget.src;
 
-    // if (!src.trim().startsWith("http")) {
-    //   src = kReleaseMode || kProfileMode ? 'assets/$src' : src;
-    // }
+      widget.controller?.logger?.call('init proxy start');
 
-    final url = Uri.parse(src);
-    _proxy = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      final url = Uri.parse(src);
+      _proxy = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
 
-    setState(() {
-      final host = _proxy!.address.address;
-      final port = _proxy!.port;
-      _proxyURL = 'http://$host:$port/';
-    });
+      widget.controller?.logger?.call('url is ${url.toString()}');
 
-    _proxy!.listen((request) async {
-      final response = request.response;
+      setState(() {
+        final host = _proxy!.address.address;
+        final port = _proxy!.port;
+        _proxyURL = 'http://$host:$port/';
+      });
+      _proxy!.listen((request) async {
+        final response = request.response;
+        widget.controller?.logger?.call('url is ${request.uri.path}');
 
-      switch (request.uri.path) {
-        case '/':
-        case '/index.html':
-          final htmlTemplate =
-              await rootBundle.loadString('packages/o3d/assets/template.html');
-          final html = utf8.encode(_buildHTML(htmlTemplate));
-          response
-            ..statusCode = HttpStatus.ok
-            ..headers.add('Content-Type', 'text/html;charset=UTF-8')
-            ..headers.add('Content-Length', html.length.toString())
-            ..add(html);
-          await response.close();
-        case '/model-viewer.min.js':
-          final code =
-              await _readAsset('packages/o3d/assets/model-viewer.min.js');
-          response
-            ..statusCode = HttpStatus.ok
-            ..headers
-                .add('Content-Type', 'application/javascript;charset=UTF-8')
-            ..headers.add('Content-Length', code.lengthInBytes.toString())
-            ..add(code);
-          await response.close();
-        case '/model':
-          if (url.isAbsolute && !url.isScheme('file')) {
-            await response.redirect(url);
-          } else {
-            final data = await (url.isScheme('file')
-                ? _readFile(url.path)
-                : _readAsset(url.path));
+        switch (request.uri.path) {
+          case '/':
+          case '/index.html':
+            final htmlTemplate = await rootBundle
+                .loadString('packages/o3d/assets/template.html');
+            final html = utf8.encode(_buildHTML(htmlTemplate));
+
+            widget.controller?.logger?.call('html is not empty: ${html.isNotEmpty}');
+
             response
               ..statusCode = HttpStatus.ok
-              ..headers.add('Content-Type', 'application/octet-stream')
-              ..headers.add('Content-Length', data.lengthInBytes.toString())
+              ..headers.add('Content-Type', 'text/html;charset=UTF-8')
               ..headers.add('Access-Control-Allow-Origin', '*')
+              ..headers.add('Content-Length', html.length.toString())
+              ..add(html);
+            await response.close();
+          case '/model-viewer.min.js':
+            final code =
+                await rootBundle.loadString(
+                    'packages/o3d/assets/model-viewer.min.js');
+            final data = utf8.encode(code);
+
+            widget.controller?.logger?.call('js is not empty: ${code.isNotEmpty} and length: ${data.length.toString()}');
+
+            response
+              ..statusCode = HttpStatus.ok
+              ..headers
+                  .add('Content-Type', 'application/javascript;charset=UTF-8')
+              ..headers.add('Access-Control-Allow-Origin', '*')
+              ..headers.add('Content-Length', data.length.toString())
               ..add(data);
             await response.close();
-          }
-        case '/favicon.ico':
-          final text = utf8.encode("Resource '${request.uri}' not found");
-          response
-            ..statusCode = HttpStatus.notFound
-            ..headers.add('Content-Type', 'text/plain;charset=UTF-8')
-            ..headers.add('Content-Length', text.length.toString())
-            ..add(text);
-          await response.close();
-        default:
-          if (request.uri.isAbsolute) {
-            debugPrint('Redirect: ${request.uri}');
-            await response.redirect(request.uri);
-          } else if (request.uri.hasAbsolutePath) {
-            // Some gltf models need other resources from the origin
-            final pathSegments = [...url.pathSegments]..removeLast();
-            final tryDestination = p.joinAll([
-              url.origin,
-              ...pathSegments,
-              request.uri.path.replaceFirst('/', ''),
-            ]);
-            debugPrint('Try: $tryDestination');
-            await response.redirect(Uri.parse(tryDestination));
-          } else {
-            debugPrint('404 with ${request.uri}');
+          case '/model':
+
+            if (url.isAbsolute && !url.isScheme('file')) {
+              await response.redirect(url);
+            } else {
+
+
+              final data = await (url.isScheme('file')
+                  ? _readFile(url.path)
+                  : _readAsset(url.path)
+              );
+              if(data != null){
+
+                widget.controller?.logger?.call(
+                    'data is not empty: ${data.isNotEmpty}');
+
+                response
+                  ..statusCode = HttpStatus.ok
+                  ..headers.add('Content-Type', 'application/octet-stream')
+                  ..headers.add('Content-Length', data.lengthInBytes.toString())
+                  ..headers.add('Access-Control-Allow-Origin', '*')
+                  ..add(data);
+                await response.close();
+              }else{
+
+                widget.controller?.logger?.call(
+                    'data is empty --------------------------------');
+              }
+
+            }
+          case '/favicon.ico':
             final text = utf8.encode("Resource '${request.uri}' not found");
             response
               ..statusCode = HttpStatus.notFound
@@ -305,18 +323,56 @@ class ModelViewerState extends State<ModelViewer> {
               ..headers.add('Content-Length', text.length.toString())
               ..add(text);
             await response.close();
-            break;
-          }
-      }
-    });
+          default:
+            if (request.uri.isAbsolute) {
+              debugPrint('Redirect: ${request.uri}');
+              await response.redirect(request.uri);
+            } else if (request.uri.hasAbsolutePath) {
+              // Some gltf models need other resources from the origin
+              final pathSegments = [...url.pathSegments]..removeLast();
+              final tryDestination = p.joinAll([
+                url.origin,
+                ...pathSegments,
+                request.uri.path.replaceFirst('/', ''),
+              ]);
+              debugPrint('Try: $tryDestination');
+              await response.redirect(Uri.parse(tryDestination));
+            } else {
+              debugPrint('404 with ${request.uri}');
+              final text = utf8.encode("Resource '${request.uri}' not found");
+              response
+                ..statusCode = HttpStatus.notFound
+                ..headers.add('Content-Type', 'text/plain;charset=UTF-8')
+                ..headers.add('Content-Length', text.length.toString())
+                ..add(text);
+              await response.close();
+              break;
+            }
+        }
+      });
+    } catch (e) {
+      rethrow;
+    }
   }
 
-  Future<Uint8List> _readAsset(final String key) async {
-    final data = await rootBundle.load(key);
-    return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+  Future<Uint8List?> _readAsset(String path) async {
+    final tempDir = await p_p.getTemporaryDirectory();
+    String tempPath = tempDir.path;
+
+    var filePath = "$tempPath/$path";
+
+    var file = File(filePath);
+    if (file.existsSync()) {
+      return file.readAsBytesSync();
+    } else {
+      return null;
+    }
   }
 
   Future<Uint8List> _readFile(final String path) async {
-    return File(path).readAsBytes();
+    final file = File(path);
+
+    widget.controller?.logger?.call('_readFile data exist: ${file.existsSync()}');
+    return file.readAsBytes();
   }
 }
