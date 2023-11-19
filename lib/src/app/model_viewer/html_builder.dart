@@ -79,7 +79,7 @@ abstract class HTMLBuilder {
       htmlTemplate = htmlTemplate.replaceFirst('/* other-css */', relatedCss);
     }
 
-    if(kIsWeb){
+    if (kIsWeb) {
       if (!src.trim().startsWith("http")) {
         src = kReleaseMode || kProfileMode ? 'assets/$src' : src;
       }

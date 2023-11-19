@@ -31,8 +31,7 @@ class ModelViewerState extends State<O3DModelViewer> {
       _initProxy().then(
         (_) => _initController()
           ..catchError(
-            (e) =>
-                widget.controller?.logger?.call('init control error: $e'),
+            (e) => widget.controller?.logger?.call('init control error: $e'),
           ),
       )..catchError(
           (e) => widget.controller?.logger?.call('init proxy error $e'),
@@ -260,7 +259,8 @@ class ModelViewerState extends State<O3DModelViewer> {
                 .loadString('packages/o3d/assets/template.html');
             final html = utf8.encode(_buildHTML(htmlTemplate));
 
-            widget.controller?.logger?.call('html is not empty: ${html.isNotEmpty}');
+            widget.controller?.logger
+                ?.call('html is not empty: ${html.isNotEmpty}');
 
             response
               ..statusCode = HttpStatus.ok
@@ -270,12 +270,12 @@ class ModelViewerState extends State<O3DModelViewer> {
               ..add(html);
             await response.close();
           case '/model-viewer.min.js':
-            final code =
-                await rootBundle.loadString(
-                    'packages/o3d/assets/model-viewer.min.js');
+            final code = await rootBundle
+                .loadString('packages/o3d/assets/model-viewer.min.js');
             final data = utf8.encode(code);
 
-            widget.controller?.logger?.call('js is not empty: ${code.isNotEmpty} and length: ${data.length.toString()}');
+            widget.controller?.logger?.call(
+                'js is not empty: ${code.isNotEmpty} and length: ${data.length.toString()}');
 
             response
               ..statusCode = HttpStatus.ok
@@ -286,20 +286,15 @@ class ModelViewerState extends State<O3DModelViewer> {
               ..add(data);
             await response.close();
           case '/model':
-
             if (url.isAbsolute && !url.isScheme('file')) {
               await response.redirect(url);
             } else {
-
-
               final data = await (url.isScheme('file')
                   ? _readFile(url.path)
-                  : _readAsset(url.path)
-              );
-              if(data != null){
-
-                widget.controller?.logger?.call(
-                    'data is not empty: ${data.isNotEmpty}');
+                  : _readAsset(url.path));
+              if (data != null) {
+                widget.controller?.logger
+                    ?.call('data is not empty: ${data.isNotEmpty}');
 
                 response
                   ..statusCode = HttpStatus.ok
@@ -308,12 +303,10 @@ class ModelViewerState extends State<O3DModelViewer> {
                   ..headers.add('Access-Control-Allow-Origin', '*')
                   ..add(data);
                 await response.close();
-              }else{
-
-                widget.controller?.logger?.call(
-                    'data is empty --------------------------------');
+              } else {
+                widget.controller?.logger
+                    ?.call('data is empty --------------------------------');
               }
-
             }
           case '/favicon.ico':
             final text = utf8.encode("Resource '${request.uri}' not found");
@@ -372,7 +365,8 @@ class ModelViewerState extends State<O3DModelViewer> {
   Future<Uint8List> _readFile(final String path) async {
     final file = File(path);
 
-    widget.controller?.logger?.call('_readFile data exist: ${file.existsSync()}');
+    widget.controller?.logger
+        ?.call('_readFile data exist: ${file.existsSync()}');
     return file.readAsBytes();
   }
 }

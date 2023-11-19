@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:o3d/o3d.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import '../../../src/app/model_viewer/model_viewer_plus_stub.dart'
-if (dart.library.io) 'model_viewer_plus_mobile.dart'
-if (dart.library.js) 'model_viewer_plus_web.dart';
+    if (dart.library.io) 'model_viewer_plus_mobile.dart'
+    if (dart.library.js) 'model_viewer_plus_web.dart';
 import '../fake/dart_html_fake.dart' if (dart.library.html) 'dart:html';
 
 /// Flutter widget for rendering interactive 3D models.

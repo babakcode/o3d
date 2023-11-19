@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../app/fake/js_fake.dart' if (dart.library.js) 'dart:js';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../interfaces/o3d_controller_interface.dart';

@@ -5,7 +5,8 @@ import 'package:flutter/services.dart' show rootBundle;
 
 import 'html_builder.dart';
 import '../fake/dart_html_fake.dart' if (dart.library.html) 'dart:html';
-import '../fake/dart_ui_fake.dart' if (dart.library.html) 'dart:ui_web' as ui_web;
+import '../fake/dart_ui_fake.dart' if (dart.library.html) 'dart:ui_web'
+    as ui_web;
 import 'o3d_model_viewer.dart';
 
 class ModelViewerState extends State<O3DModelViewer> {

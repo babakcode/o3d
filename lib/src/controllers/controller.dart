@@ -25,13 +25,10 @@ class O3DController implements O3DControllerInterface {
   ValueChanged<Object>? logger;
 
   @override
-  set animationName(String? set) =>
-      _dataSource.animationName = set;
+  set animationName(String? set) => _dataSource.animationName = set;
 
   @override
-  set autoRotate(bool? set) =>
-    _dataSource.autoRotate = set;
-
+  set autoRotate(bool? set) => _dataSource.autoRotate = set;
 
   @override
   set cameraControls(bool? set) => _dataSource.cameraControls = set;

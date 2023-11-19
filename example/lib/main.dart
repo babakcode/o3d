@@ -51,18 +51,20 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => controller.cameraTarget(1.2, 1, 4),
               icon: const Icon(Icons.change_circle_outlined)),
           IconButton(
-              onPressed: () => {cameraControls = !cameraControls, controller.cameraControls = cameraControls},
+              onPressed: () => {
+                    cameraControls = !cameraControls,
+                    controller.cameraControls = cameraControls
+                  },
               icon: const Icon(Icons.camera_alt_outlined)),
         ],
       ),
       body: O3D(
-        controller: controller,
-        src:
-          'https://modelviewer.dev/shared-assets/models/Astronaut.glb'
+          controller: controller,
+          src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb'
           //   //'https://assets.babakcode.com/flutter/projects/ui_3d_flutter/'
           //   'assets/glb/'
           //   'jeff_johansen_idle.glb',
-      ),
+          ),
     );
   }
 }

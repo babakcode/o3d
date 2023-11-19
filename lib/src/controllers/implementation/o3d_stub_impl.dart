@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import '../interfaces/o3d_controller_interface.dart';
 
 class O3dImp implements O3DControllerInterface {
@@ -59,5 +58,4 @@ class O3dImp implements O3DControllerInterface {
       })();
     ''');
   }
-
 }
