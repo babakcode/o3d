@@ -50,6 +50,9 @@ Android 9 (API level 28) changed the default for [`android:usesCleartextTraffic`
 so you will need to configure your app's `android/app/src/main/AndroidManifest.xml` as follows:
 
 ```diff
+
++    <uses-permission android:name="android.permission.INTERNET"/>
+
      <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
