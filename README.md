@@ -1,7 +1,5 @@
 # O3D - Model Viewer for Flutter
 
-<https://pub.dev/packages/model_viewer_plus> - Fork from this package.
-
 This is a [Flutter](https://flutter.dev) widget for rendering interactive
 3D models in the [glTF](https://www.khronos.org/gltf/) and
 [GLB](https://wiki.fileformat.com/3d/glb/) formats.
@@ -11,13 +9,10 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
 ## Screenshot
 
-online demo [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
+online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/)
+online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
 
-<div align="center">
-  <a href="https://www.youtube.com/watch?v=YAOYXTLlXdw"><img src="./_includes/s.jpg" width="100%" alt="O3D package update 3.0.0"></a>
-</div>
-
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YAOYXTLlXdw/0.jpg)](https://www.youtube.com/watch?v=YAOYXTLlXdw)
+<a href="https://www.youtube.com/watch?v=YAOYXTLlXdw"><img src="./_includes/s.jpg" width="100%" alt="O3D package update 3.0.0"></a>
 
 <img src="https://assets.babakcode.com/flutter/packages/o3d/s1.gif" alt="o3d gif" width="100%" loading="lazy"/>  
 
@@ -33,28 +28,18 @@ online demo [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.githu
 - iOS (AR View may not available on iOS 16+)
 - Web, with [a recent system browser version](https://modelviewer.dev/#section-browser-support).
 
-## Notes
-
-We use
-the [Google APP](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox)
-, `com.google.android.googlequicksearchbox` to display interactive 3D models on Android.
-The model displays in 'ar_preferred' mode by default, Scene Viewer launches in AR native mode as the
-entry mode.
-If [Google Play Services for AR (ARCore, `com.google.ar.core`)](https://play.google.com/store/apps/details?id=com.google.ar.core)
-isn't present, Scene Viewer gracefully falls back to 3D mode as the entry mode.
-
 ## Installation
 
 ### `pubspec.yaml`
 
 ```yaml
 dependencies:
-  o3d: any
+  o3d: 3.0.0
 ```
 
 ### `AndroidManifest.xml` (Android 9+ only)
 
-To use this widget on Android 9+ devices, your app must be permitted to make an HTTP connection
+**Test on `real device`** and to use this widget on Android 9+ devices, your app must be permitted to make an HTTP connection
 to `http://localhost:XXXXX`.
 Android 9 (API level 28) changed the default for [`android:usesCleartextTraffic`] from `true`
 to `false`,
@@ -118,6 +103,18 @@ using `https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js`, you are
 version of `<model-viewier>`. You may replace the
 value of `src` attribute with another CDN mirror's URL. But please notice that our model-viewer-plus
 maybe not able to keep up with the `<model-viewier>`'s latest version.
+
+
+## Notes
+
+We use
+the [Google APP](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox)
+, `com.google.android.googlequicksearchbox` to display interactive 3D models on Android.
+The model displays in 'ar_preferred' mode by default, Scene Viewer launches in AR native mode as the
+entry mode.
+If [Google Play Services for AR (ARCore, `com.google.ar.core`)](https://play.google.com/store/apps/details?id=com.google.ar.core)
+isn't present, Scene Viewer gracefully falls back to 3D mode as the entry mode.
+
 
 ## Features
 

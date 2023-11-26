@@ -6,8 +6,7 @@ class Utils {
   String get generateId =>
       'BabakCode${random.nextInt(99999)}${random.nextInt(99999)}';
 
-  String relatedJs({required String id}) =>
-      """
+  String relatedJs({required String id}) => """
 cameraOrbit$id = (a, b, c) => {document.querySelector('#$id').cameraOrbit = `\${a}deg \${b}deg \${c}m`}
 cameraTarget$id = (x, y, z) => {document.querySelector('#$id').cameraTarget = `\${x}m \${y}m \${z}m`}
 customEvaluate$id = (code) => { eval(code) }

@@ -54,9 +54,10 @@ class ModelViewerState extends State<O3DModelViewer> {
               semanticsLabel: 'Loading Model Viewer...',
             ),
           )
-        : HtmlElementView(viewType: 'babakcode-model-viewer-html-${widget.id}',
-      key: Key(widget.id),
-    );
+        : HtmlElementView(
+            viewType: 'babakcode-model-viewer-html-${widget.id}',
+            key: Key(widget.id),
+          );
   }
 
   String _buildHTML(final String htmlTemplate) {

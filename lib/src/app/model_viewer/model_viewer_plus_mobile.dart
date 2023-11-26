@@ -266,9 +266,8 @@ class ModelViewerState extends State<O3DModelViewer> {
                 .loadString('packages/o3d/assets/template.html');
             final html = utf8.encode(_buildHTML(htmlTemplate));
 
-
-            widget.controller?.logger
-                ?.call('html is not empty: ${html.isNotEmpty} and length is ${html.length.toString()}');
+            widget.controller?.logger?.call(
+                'html is not empty: ${html.isNotEmpty} and length is ${html.length.toString()}');
 
             response
               ..statusCode = HttpStatus.ok
@@ -301,8 +300,8 @@ class ModelViewerState extends State<O3DModelViewer> {
                   ? _readFile(url.path)
                   : _readAsset(url.path));
               if (data != null) {
-                widget.controller?.logger
-                    ?.call('data is not empty: ${data.isNotEmpty} and length is ${data.length}');
+                widget.controller?.logger?.call(
+                    'data is not empty: ${data.isNotEmpty} and length is ${data.length}');
 
                 response
                   ..statusCode = HttpStatus.ok
@@ -319,8 +318,8 @@ class ModelViewerState extends State<O3DModelViewer> {
           case '/favicon.ico':
             final text = utf8.encode("Resource '${request.uri}' not found");
 
-            widget.controller?.logger
-                ?.call('favicon is not empty: ${text.isNotEmpty} and length is ${text.length.toString()}');
+            widget.controller?.logger?.call(
+                'favicon is not empty: ${text.isNotEmpty} and length is ${text.length.toString()}');
 
             response
               ..statusCode = HttpStatus.notFound
@@ -373,18 +372,16 @@ class ModelViewerState extends State<O3DModelViewer> {
     //   return null;
     // }
     /// 2
-    try{
+    try {
       final code = await rootBundle.load(path);
 
       return code.buffer.asUint8List();
-    }catch(e){
-      widget.controller?.logger
-          ?.call('error in _readAsset: $e');
+    } catch (e) {
+      widget.controller?.logger?.call('error in _readAsset: $e');
       return null;
     }
-
-
   }
+
   Future<Uint8List> _readFile(final String path) async {
     final file = File(path);
 

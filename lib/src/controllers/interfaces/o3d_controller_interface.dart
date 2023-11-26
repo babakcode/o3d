@@ -55,5 +55,6 @@ abstract class O3DControllerInterface {
   /// [variantName] for model material
   /// `setter` func
   set variantName(String? variantName);
+
   /// others will be added
 }

@@ -6,8 +6,10 @@ import '../interfaces/o3d_controller_interface.dart';
 class O3dImp implements O3DControllerInterface {
   final WebViewController? webViewController;
   final String id;
-  O3dImp({this.webViewController,
-    required this.id,});
+  O3dImp({
+    this.webViewController,
+    required this.id,
+  });
 
   @override
   void cameraOrbit(double theta, double phi, double radius) {
@@ -51,5 +53,4 @@ class O3dImp implements O3DControllerInterface {
   set variantName(String? variantName) {
     context.callMethod("variantName$id", [variantName]);
   }
-
 }

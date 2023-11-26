@@ -1,4 +1,12 @@
 
+## 3.0.0
+
+* ### fixed
+* Android load issue in some devices
+* Web js scripts conflict
+* ### new features
+* added `variantName` method to controller
+
 ## 2.0.0
 
 * ### fixed
