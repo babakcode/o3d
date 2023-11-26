@@ -13,9 +13,7 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
 online demo [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
 
-{% include youtube.html id="YAOYXTLlXdw" %}
-
-<iframe width="100%" height="600" src="https://www.youtube.com/embed/YAOYXTLlXdw" frameborder="0" allowfullscreen></iframe>
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YAOYXTLlXdw/0.jpg)](https://www.youtube.com/watch?v=YAOYXTLlXdw)
 
 <img src="https://assets.babakcode.com/flutter/packages/o3d/s1.gif" alt="o3d gif" width="100%" loading="lazy"/>  
 
