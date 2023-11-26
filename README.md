@@ -14,7 +14,7 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 online demo [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=YAOYXTLlXdw"><img src="./_includes/s.png" width="100%" alt="O3D package update 3.0.0"></a>
+  <a href="https://www.youtube.com/watch?v=YAOYXTLlXdw"><img src="./_includes/s.jpg" width="100%" alt="O3D package update 3.0.0"></a>
 </div>
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YAOYXTLlXdw/0.jpg)](https://www.youtube.com/watch?v=YAOYXTLlXdw)
