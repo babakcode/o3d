@@ -1,5 +1,7 @@
+import 'package:example/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:o3d/o3d.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,9 +35,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   // to control the animation
-  O3DController controller = O3DController();
+  final O3DController controller = O3DController(),
+      controller2 = O3DController(),
+      controller3 = O3DController();
   List<String> logs = [];
   bool cameraControls = false;
+
+  @override
+  void initState() {
+    super.initState();
+    controller.logger = (data) {
+      logs.add(data.toString());
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,28 +55,248 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
+        centerTitle: true,
+        leading: IconButton.filledTonal(
+            onPressed: () {
+              launchUrl(Uri.parse('https://pub.dev/packages/o3d'));
+            },
+            icon: const Icon(Icons.source)),
         actions: [
           IconButton(
-              onPressed: () => controller.cameraOrbit(20, 20, 5),
-              icon: const Icon(Icons.change_circle)),
-          IconButton(
-              onPressed: () => controller.cameraTarget(1.2, 1, 4),
-              icon: const Icon(Icons.change_circle_outlined)),
-          IconButton(
               onPressed: () => {
-                    cameraControls = !cameraControls,
-                    controller.cameraControls = cameraControls
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoggerPage(logs),
+                        ))
                   },
-              icon: const Icon(Icons.camera_alt_outlined)),
+              icon: const Icon(Icons.login_rounded)),
         ],
       ),
-      body: O3D(
-          controller: controller,
-          src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb'
-          //   //'https://assets.babakcode.com/flutter/projects/ui_3d_flutter/'
-          //   'assets/glb/'
-          //   'jeff_johansen_idle.glb',
-          ),
+      body:
+
+          /// 1
+          ModelDetail(
+        actions: [
+          const Text("animations:"),
+          FilledButton.icon(
+              onPressed: () => controller3.animationName = 'FallingBack',
+              icon: const Icon(Icons.add),
+              label: const Text("shoot him")),
+          FilledButton.icon(
+              onPressed: () => controller3.animationName = 'FallingForward',
+              icon: const Icon(Icons.add),
+              label: const Text("shoot leg")),
+          FilledButton(
+              onPressed: () => controller3.animationName = 'Run',
+              child: const Text('Run')),
+          FilledButton(
+              onPressed: () => controller3.animationName = 'Idle',
+              child: const Text('Idle')),
+          FilledButton(
+              onPressed: () => controller3.cameraTarget(0, 1, 2.5),
+              child: const Text('ZoomOut')),
+          FilledButton(
+              onPressed: () => controller3.cameraTarget(0, 1, 0),
+              child: const Text('ZoomIn'))
+        ],
+        o3d: O3D(
+            controller: controller3,
+            src: 'assets/glb/zombie.glb',
+            autoPlay: true,
+            cameraControls: false,
+            cameraTarget: CameraTarget(0, 1, 0)),
+      ),
+
+      /// 2
+      //       ModelDetail(
+      //         actions: [
+      //           FilledButton(
+      //             onPressed: () => controller.variantName = null,
+      //             child: const Text('Default'),
+      //           ),
+      //           FilledButton(
+      //             onPressed: () => controller.variantName = 'street',
+      //             child: const Text('street'),
+      //           ),
+      //           FilledButton(
+      //             onPressed: () => controller.variantName = 'beach',
+      //             child: const Text('beach'),
+      //           ),
+      //         ],
+      //         o3d: O3D(
+      //           controller: controller,
+      //           src: 'assets/glb/materials_variants_shoe.glb',
+      //           // variantName: 'street',
+      //         ),
+      //       ),
+
+      // body: SingleChildScrollView(
+      //   child: Column(
+      //     children: [
+      //       // /// model 2
+      //       // ModelDetail(
+      //       //   actions: [
+      //       //     FilledButton(
+      //       //       onPressed: () => controller2.animationName = 'Survey',
+      //       //       child: const Text('Survey'),
+      //       //     ),
+      //       //     FilledButton(
+      //       //       onPressed: () => controller2.animationName = 'Walk',
+      //       //       child: const Text('Walk'),
+      //       //     ),
+      //       //     FilledButton(
+      //       //       onPressed: () => controller2.animationName = 'Run',
+      //       //       child: const Text('Run'),
+      //       //     ),
+      //       //     FilledButton(
+      //       //       onPressed: () => controller2.autoPlay = true,
+      //       //       child: const Text('Play Animation'),
+      //       //     ),
+      //       //   ],
+      //       //   o3d: O3D(
+      //       //     controller: controller2,
+      //       //     src: 'assets/glb/fox.glb',
+      //       //   ),
+      //       // ),
+      //       // const Divider(),
+      //       //
+      //       // /// model 1
+      //       // ModelDetail(
+      //       //   actions: [
+      //       //     FilledButton(
+      //       //       onPressed: () => controller.variantName = null,
+      //       //       child: const Text('Default'),
+      //       //     ),
+      //       //     FilledButton(
+      //       //       onPressed: () => controller.variantName = 'street',
+      //       //       child: const Text('street'),
+      //       //     ),
+      //       //     FilledButton(
+      //       //       onPressed: () => controller.variantName = 'beach',
+      //       //       child: const Text('beach'),
+      //       //     ),
+      //       //   ],
+      //       //   o3d: O3D(
+      //       //     controller: controller,
+      //       //     src: 'assets/glb/materials_variants_shoe.glb',
+      //       //     // variantName: 'street',
+      //       //   ),
+      //       // ),
+      //       // const Divider(),
+      //       //
+      //       // // model 3
+      //       // ModelDetail(
+      //       //   actions: [
+      //       //     FilledButton(
+      //       //       onPressed: () => controller3.animationName = 'Running',
+      //       //       child: const Text('Running'),
+      //       //     ),
+      //       //     FilledButton(
+      //       //       onPressed: () => controller3.animationName = 'Dance',
+      //       //       child: const Text('Dance'),
+      //       //     ),
+      //       //     FilledButton(
+      //       //       onPressed: () => controller3.animationName = 'Wave',
+      //       //       child: const Text('Wave'),
+      //       //     ),
+      //       //     FilledButton(
+      //       //       onPressed: () => controller3.animationName = 'Idle',
+      //       //       child: const Text('Idle'),
+      //       //     ),
+      //       //   ],
+      //       //   o3d: O3D(
+      //       //     controller: controller3,
+      //       //     src:
+      //       //         'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb',
+      //       //     autoPlay: true,
+      //       //   ),
+      //       // ),
+      //       // const Divider(),
+      //       //
+      //       // model 3
+      //       ModelDetail(
+      //         actions: [
+      //           FilledButton.icon(
+      //             onPressed: () => controller3.animationName = 'FallingBack',
+      //             // child: const Text('Running'),
+      //             icon: const Icon(Icons.add),
+      //             label: const Text("shoot him"),
+      //           ),
+      //           FilledButton.icon(
+      //             onPressed: () => controller3.animationName = 'FallingForward',
+      //             // child: const Text('Running'),
+      //             icon: const Icon(Icons.add),
+      //             label: const Text("shoot feet"),
+      //           ),
+      //           FilledButton(
+      //             onPressed: () => controller3.animationName = 'Wave',
+      //             child: const Text('Wave'),
+      //           ),
+      //           FilledButton(
+      //             onPressed: () => controller3.animationName = 'Idle',
+      //             child: const Text('Idle'),
+      //           ),
+      //         ],
+      //         o3d: O3D(
+      //           controller: controller3,
+      //           src:
+      //               'assets/glb/zombie.glb',
+      //           autoPlay: true,
+      //         ),
+      //       ),
+      //       const Divider(),
+      //     ],
+      //   ),
+      // ),
+    );
+  }
+}
+
+class ModelDetail extends StatelessWidget {
+  final List<Widget> actions;
+  final Widget o3d;
+
+  const ModelDetail({
+    super.key,
+    required this.actions,
+    required this.o3d,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.grey.shade100.withOpacity(.3),
+      elevation: 0,
+      margin: const EdgeInsets.all(16),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          children: [
+            Wrap(
+              children: actions
+                  .map((child) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
+                        child: child,
+                      ))
+                  .toList(),
+            ),
+            Expanded(
+                child: Card(
+                    color: Colors.grey.shade100.withOpacity(.3),
+                    elevation: 0,
+                    child: o3d
+                    // AspectRatio(aspectRatio: 1,
+                    //     child: o3d
+                    // ),
+                    ))
+          ],
+        ),
+      ),
     );
   }
 }

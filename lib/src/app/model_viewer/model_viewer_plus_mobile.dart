@@ -1,14 +1,12 @@
 import 'dart:async';
 import 'dart:convert' show utf8;
 import 'dart:io' show File, HttpServer, HttpStatus, InternetAddress, Platform;
-
 import 'package:android_intent_plus/android_intent.dart' as android_content;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart' as p_p;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart'
@@ -23,6 +21,7 @@ class ModelViewerState extends State<O3DModelViewer> {
   HttpServer? _proxy;
   WebViewController? _webViewController;
   late String _proxyURL;
+  List<String> routesRequested = [];
 
   @override
   void initState() {
@@ -230,6 +229,8 @@ class ModelViewerState extends State<O3DModelViewer> {
     widget.onWebViewCreated?.call(webViewController);
     await webViewController.loadRequest(Uri.parse(_proxyURL));
     setState(() => _webViewController = webViewController);
+    widget.controller?.logger?.call('initialized webViewController');
+    // Future.delayed(const Duration(seconds: 5),() => _webViewController?.loadRequest(Uri.parse('${_proxyURL}model')));
   }
 
   Future<void> _initProxy() async {
@@ -250,6 +251,12 @@ class ModelViewerState extends State<O3DModelViewer> {
       });
       _proxy!.listen((request) async {
         final response = request.response;
+        // if(routesRequested.contains(request.uri.path)){
+        //   return;
+        // }
+
+        // routesRequested.add(request.uri.path);
+
         widget.controller?.logger?.call('url is ${request.uri.path}');
 
         switch (request.uri.path) {
@@ -259,8 +266,9 @@ class ModelViewerState extends State<O3DModelViewer> {
                 .loadString('packages/o3d/assets/template.html');
             final html = utf8.encode(_buildHTML(htmlTemplate));
 
+
             widget.controller?.logger
-                ?.call('html is not empty: ${html.isNotEmpty}');
+                ?.call('html is not empty: ${html.isNotEmpty} and length is ${html.length.toString()}');
 
             response
               ..statusCode = HttpStatus.ok
@@ -294,7 +302,7 @@ class ModelViewerState extends State<O3DModelViewer> {
                   : _readAsset(url.path));
               if (data != null) {
                 widget.controller?.logger
-                    ?.call('data is not empty: ${data.isNotEmpty}');
+                    ?.call('data is not empty: ${data.isNotEmpty} and length is ${data.length}');
 
                 response
                   ..statusCode = HttpStatus.ok
@@ -302,14 +310,18 @@ class ModelViewerState extends State<O3DModelViewer> {
                   ..headers.add('Content-Length', data.lengthInBytes.toString())
                   ..headers.add('Access-Control-Allow-Origin', '*')
                   ..add(data);
-                await response.close();
               } else {
                 widget.controller?.logger
                     ?.call('data is empty --------------------------------');
               }
+              await response.close();
             }
           case '/favicon.ico':
             final text = utf8.encode("Resource '${request.uri}' not found");
+
+            widget.controller?.logger
+                ?.call('favicon is not empty: ${text.isNotEmpty} and length is ${text.length.toString()}');
+
             response
               ..statusCode = HttpStatus.notFound
               ..headers.add('Content-Type', 'text/plain;charset=UTF-8')
@@ -349,19 +361,30 @@ class ModelViewerState extends State<O3DModelViewer> {
   }
 
   Future<Uint8List?> _readAsset(String path) async {
-    final tempDir = await p_p.getTemporaryDirectory();
-    String tempPath = tempDir.path;
+    // final tempDir = await p_p.getTemporaryDirectory();
+    // String tempPath = tempDir.path;
+    //
+    // final filePath = "$tempPath/$path";
+    // print("filePathfilePath=$filePath");
+    // final file = File(filePath);
+    // if (file.existsSync()) {
+    //   return file.readAsBytesSync();
+    // } else {
+    //   return null;
+    // }
+    /// 2
+    try{
+      final code = await rootBundle.load(path);
 
-    var filePath = "$tempPath/$path";
-
-    var file = File(filePath);
-    if (file.existsSync()) {
-      return file.readAsBytesSync();
-    } else {
+      return code.buffer.asUint8List();
+    }catch(e){
+      widget.controller?.logger
+          ?.call('error in _readAsset: $e');
       return null;
     }
-  }
 
+
+  }
   Future<Uint8List> _readFile(final String path) async {
     final file = File(path);
 

@@ -687,7 +687,8 @@ class _O3DState extends State<O3D> {
       onWebViewCreated: (data) {
         widget.onWebViewCreated?.call(data);
         controller._controllerEntity.webViewController = data;
-        controller._initDataSource = O3dDataSource(webViewController: data);
+        controller._initDataSource =
+            O3dDataSource(webViewController: data, id: id);
       },
     );
   }

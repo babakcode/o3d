@@ -4,14 +4,16 @@ import '../interfaces/o3d_controller_interface.dart';
 
 class O3dImp implements O3DControllerInterface {
   final WebViewController? webViewController;
+  final String id;
   O3dImp({
     this.webViewController,
+    required this.id,
   });
 
   @override
   void cameraOrbit(double theta, double phi, double radius) {
     webViewController?.runJavaScript('''(() => {
-        cameraOrbit($theta, $phi, $radius); 
+        cameraOrbit$id($theta, $phi, $radius); 
       })();
     ''');
   }
@@ -19,7 +21,7 @@ class O3dImp implements O3DControllerInterface {
   @override
   void cameraTarget(double x, double y, double z) {
     webViewController?.runJavaScript('''(() => {
-        cameraTarget($x, $y, $z); 
+        cameraTarget$id($x, $y, $z); 
       })();
     ''');
   }
@@ -27,7 +29,7 @@ class O3dImp implements O3DControllerInterface {
   @override
   void customJsCode(String code) {
     webViewController?.runJavaScript('''(() => {
-        customEvaluate('$code'); 
+        customEvaluate$id('$code'); 
       })();
     ''');
   }
@@ -38,7 +40,7 @@ class O3dImp implements O3DControllerInterface {
   @override
   set animationName(String? name) {
     webViewController?.runJavaScript('''(() => {
-        animationName('$name'); 
+        animationName$id('$name'); 
       })();
     ''');
   }
@@ -46,7 +48,15 @@ class O3dImp implements O3DControllerInterface {
   @override
   set autoRotate(bool? set) {
     webViewController?.runJavaScript('''(() => {
-        autoRotate($set); 
+        autoRotate$id($set); 
+      })();
+    ''');
+  }
+
+  @override
+  set autoPlay(bool? set) {
+    webViewController?.runJavaScript('''(() => {
+        autoPlay$id($set); 
       })();
     ''');
   }
@@ -54,8 +64,17 @@ class O3dImp implements O3DControllerInterface {
   @override
   set cameraControls(bool? set) {
     webViewController?.runJavaScript('''(() => {
-        cameraControls($set); 
+        cameraControls$id($set); 
       })();
     ''');
   }
+
+  @override
+  set variantName(String? set) {
+    webViewController?.runJavaScript('''(() => {
+        variantName$id('$set'); 
+      })();
+    ''');
+  }
+
 }

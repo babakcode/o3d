@@ -4,15 +4,17 @@ class Utils {
   final random = Random();
 
   String get generateId =>
-      'babakcode-${random.nextInt(99999999)}-${random.nextInt(99999999)}';
+      'BabakCode${random.nextInt(99999)}${random.nextInt(99999)}';
 
   String relatedJs({required String id}) =>
-      """var mainModelViewer = document.querySelector('#$id');
-cameraOrbit = (a, b, c) => {mainModelViewer.cameraOrbit = `\${a}deg \${b}deg \${c}m`}
-cameraTarget = (x, y, z) => {mainModelViewer.cameraTarget = `\${x}m \${y}m \${z}m`}
-customEvaluate = (code) => { eval(code) }
-animationName = (set) => { mainModelViewer.setAttribute('animation-name', set); }
-autoRotate = (set) => { mainModelViewer.setAttribute('auto-rotate', set ?? false); }
-cameraControls = (set) => { mainModelViewer.setAttribute('camera-controls', set ?? false); }
+      """
+cameraOrbit$id = (a, b, c) => {document.querySelector('#$id').cameraOrbit = `\${a}deg \${b}deg \${c}m`}
+cameraTarget$id = (x, y, z) => {document.querySelector('#$id').cameraTarget = `\${x}m \${y}m \${z}m`}
+customEvaluate$id = (code) => { eval(code) }
+animationName$id = (set) => { document.querySelector('#$id').setAttribute('animation-name', set); }
+autoRotate$id = (set) => { document.querySelector('#$id').setAttribute('auto-rotate', set ?? false); }
+autoPlay$id = (set) => { (set ?? false) ? document.querySelector('#$id').play() : document.querySelector('#$id').pause(); }
+cameraControls$id = (set) => { document.querySelector('#$id').setAttribute('camera-controls', set ?? false); }
+variantName$id = (set) => { document.querySelector('#$id').variantName = set; }
 """;
 }

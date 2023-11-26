@@ -11,7 +11,6 @@ import 'o3d_model_viewer.dart';
 
 class ModelViewerState extends State<O3DModelViewer> {
   bool _isLoading = true;
-  final String _uniqueViewType = UniqueKey().toString();
 
   @override
   void initState() {
@@ -31,7 +30,7 @@ class ModelViewerState extends State<O3DModelViewer> {
     final html = _buildHTML(htmlTemplate);
 
     ui_web.platformViewRegistry.registerViewFactory(
-      'model-viewer-html-$_uniqueViewType',
+      'babakcode-model-viewer-html-${widget.id}',
       (viewId) => HtmlHtmlElement()
         // ignore: avoid_dynamic_calls
         ..style.border = 'none'
@@ -55,7 +54,9 @@ class ModelViewerState extends State<O3DModelViewer> {
               semanticsLabel: 'Loading Model Viewer...',
             ),
           )
-        : HtmlElementView(viewType: 'model-viewer-html-$_uniqueViewType');
+        : HtmlElementView(viewType: 'babakcode-model-viewer-html-${widget.id}',
+      key: Key(widget.id),
+    );
   }
 
   String _buildHTML(final String htmlTemplate) {

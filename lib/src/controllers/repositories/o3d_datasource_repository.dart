@@ -9,8 +9,8 @@ class O3dDataSource implements O3DControllerInterface {
 
   final WebViewController? webViewController;
 
-  O3dDataSource({this.webViewController})
-      : _o3dImp = O3dImp(webViewController: webViewController);
+  O3dDataSource({this.webViewController, required String id})
+      : _o3dImp = O3dImp(webViewController: webViewController, id: id);
 
   @override
   void cameraOrbit(double theta, double phi, double radius) =>
@@ -27,17 +27,17 @@ class O3dDataSource implements O3DControllerInterface {
   ValueChanged<Object>? logger;
 
   @override
-  set animationName(String? name) {
-    _o3dImp.animationName = name;
-  }
+  set animationName(String? name) => _o3dImp.animationName = name;
 
   @override
-  set autoRotate(bool? set) {
-    _o3dImp.autoRotate = set;
-  }
+  set autoRotate(bool? set) => _o3dImp.autoRotate = set;
 
   @override
-  set cameraControls(bool? set) {
-    _o3dImp.cameraControls = set;
-  }
+  set autoPlay(bool? set) => _o3dImp.autoPlay = set;
+
+  @override
+  set cameraControls(bool? set) => _o3dImp.cameraControls = set;
+
+  @override
+  set variantName(String? set) => _o3dImp.variantName = set;
 }

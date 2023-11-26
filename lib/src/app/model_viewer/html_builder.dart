@@ -71,7 +71,7 @@ abstract class HTMLBuilder {
     final String? innerModelViewerHtml,
     final String? relatedCss,
     final String? relatedJs,
-    final String? id,
+    required final String id,
     final bool? debugLogging,
   }) {
     if (relatedCss != null) {
@@ -377,9 +377,7 @@ abstract class HTMLBuilder {
     }
     modelViewerHtml.write('"'); // close style
 
-    if (id != null) {
-      modelViewerHtml.write(' id="${htmlEscape.convert(id)}"');
-    }
+    modelViewerHtml.write(' id="${htmlEscape.convert(id)}"');
 
     modelViewerHtml.writeln('>'); // close the previous tag of omodel-viewer
     if (innerModelViewerHtml != null) {

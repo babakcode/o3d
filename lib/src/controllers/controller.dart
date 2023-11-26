@@ -2,8 +2,9 @@ part of '../app/o3d.dart';
 
 class O3DController implements O3DControllerInterface {
   late ControllerEntity _controllerEntity;
-  late O3dDataSource _dataSource =
-      O3dDataSource(webViewController: _controllerEntity.webViewController);
+  late O3dDataSource _dataSource = O3dDataSource(
+      id: _controllerEntity.id,
+      webViewController: _controllerEntity.webViewController);
 
   void _init(ControllerEntity controllerEntity) =>
       _controllerEntity = controllerEntity;
@@ -32,4 +33,10 @@ class O3DController implements O3DControllerInterface {
 
   @override
   set cameraControls(bool? set) => _dataSource.cameraControls = set;
+
+  @override
+  set variantName(String? set) => _dataSource.variantName = set;
+
+  @override
+  set autoPlay(bool? set) => _dataSource.autoPlay = set;
 }

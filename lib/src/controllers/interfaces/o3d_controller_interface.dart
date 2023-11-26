@@ -48,5 +48,12 @@ abstract class O3DControllerInterface {
   /// `setter` func
   set autoRotate(bool? set);
 
+  /// [autoPlay] for playing automatic animation
+  /// `setter` func
+  set autoPlay(bool? set);
+
+  /// [variantName] for model material
+  /// `setter` func
+  set variantName(String? variantName);
   /// others will be added
 }

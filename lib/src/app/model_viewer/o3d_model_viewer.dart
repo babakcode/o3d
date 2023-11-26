@@ -61,7 +61,7 @@ class O3DModelViewer extends StatefulWidget {
     this.innerModelViewerHtml,
     this.relatedCss,
     this.relatedJs,
-    this.id,
+    required this.id,
     this.debugLogging = true,
     this.overwriteNodeValidatorBuilder,
     this.javascriptChannels,
@@ -555,7 +555,7 @@ class O3DModelViewer extends StatefulWidget {
   final String? relatedJs;
 
   /// The id of the [O3DModelViewer] in HTML.
-  final String? id;
+  final String id;
 
   /// If false, HTMLBuilder will not print debug logs.
   ///
