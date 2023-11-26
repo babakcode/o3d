@@ -15,11 +15,7 @@ online demo [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.githu
 
 {% include youtube.html %}
 
-<div class="embed-container">
-    <iframe width="100%" height="" 
- src="https://www.youtube.com/embed/YAOYXTLlXdw" 
- frameborder="0" allowfullscreen></iframe>
-</div>
+<iframe width="100%" height="600" src="https://www.youtube.com/embed/YAOYXTLlXdw" frameborder="0" allowfullscreen></iframe>
 
 <img src="https://assets.babakcode.com/flutter/packages/o3d/s1.gif" alt="o3d gif" width="100%" loading="lazy"/>  
 
@@ -37,9 +33,13 @@ online demo [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.githu
 
 ## Notes
 
-We use the [Google APP](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox), `com.google.android.googlequicksearchbox` to display interactive 3D models on Android.
-The model displays in 'ar_preferred' mode by default, Scene Viewer launches in AR native mode as the entry mode.
-If [Google Play Services for AR (ARCore, `com.google.ar.core`)](https://play.google.com/store/apps/details?id=com.google.ar.core) isn't present, Scene Viewer gracefully falls back to 3D mode as the entry mode.
+We use
+the [Google APP](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox)
+, `com.google.android.googlequicksearchbox` to display interactive 3D models on Android.
+The model displays in 'ar_preferred' mode by default, Scene Viewer launches in AR native mode as the
+entry mode.
+If [Google Play Services for AR (ARCore, `com.google.ar.core`)](https://play.google.com/store/apps/details?id=com.google.ar.core)
+isn't present, Scene Viewer gracefully falls back to 3D mode as the entry mode.
 
 ## Installation
 
@@ -52,8 +52,10 @@ dependencies:
 
 ### `AndroidManifest.xml` (Android 9+ only)
 
-To use this widget on Android 9+ devices, your app must be permitted to make an HTTP connection to `http://localhost:XXXXX`.
-Android 9 (API level 28) changed the default for [`android:usesCleartextTraffic`] from `true` to `false`,
+To use this widget on Android 9+ devices, your app must be permitted to make an HTTP connection
+to `http://localhost:XXXXX`.
+Android 9 (API level 28) changed the default for [`android:usesCleartextTraffic`] from `true`
+to `false`,
 so you will need to configure your app's `android/app/src/main/AndroidManifest.xml` as follows:
 
 ```diff
@@ -88,8 +90,8 @@ by adding a boolean property to your app's `ios/Runner/Info.plist` file, with
 the key `io.flutter.embedded_views_preview` and the value `YES`:
 
 ```xml
-  <key>io.flutter.embedded_views_preview</key>
-  <true/>
+
+<key>io.flutter.embedded_views_preview</key><true />
 ```
 
 ### `web/index.html` (Web only)
@@ -97,16 +99,23 @@ the key `io.flutter.embedded_views_preview` and the value `YES`:
 Modify the `<head>` tag of your `web/index.html` to load the JavaScript, like so:
 
 ```html
+
 <head>
 
-  <!-- Other stuff -->
+    <!-- Other stuff -->
 
-   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js" defer></script>
+    <script type="module"
+            src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"
+            defer></script>
 </head>
 ```
 
-`./assets/packages/model_viewer_plus/assets/model-viewer.min.js` will use the default js file which is included in this package's asset. The [official site](https://modelviewer.dev) uses unpkg, by using `https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js`, you are using the latest version of `<model-viewier>`. You may replace the
-value of `src` attribute with another CDN mirror's URL. But please notice that our model-viewer-plus maybe not able to keep up with the `<model-viewier>`'s latest version.
+`./assets/packages/model_viewer_plus/assets/model-viewer.min.js` will use the default js file which
+is included in this package's asset. The [official site](https://modelviewer.dev) uses unpkg, by
+using `https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js`, you are using the latest
+version of `<model-viewier>`. You may replace the
+value of `src` attribute with another CDN mirror's URL. But please notice that our model-viewer-plus
+maybe not able to keep up with the `<model-viewier>`'s latest version.
 
 ## Features
 
@@ -165,6 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
+
 ### New feature is **controller**
 
 methods:
@@ -173,45 +183,59 @@ methods:
 
 use **controller.cameraTarget(20, 20, 5)**
 
-> According to web-based features https://modelviewer.dev/examples: Set the starting and/or subsequent point the camera orbits around.  
-Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".  
-Also supports units in centimeters ("cm") or millimeters ("mm").  
-A special value "auto" can be used, which sets the target to  
-the center of the model's bounding box in that dimension.  
-Any time this value changes from its initially configured value,  
-the camera will interpolate from its current position to the new value.
-
-
+> According to web-based features https://modelviewer.dev/examples: Set the starting and/or
+> subsequent point the camera orbits around.  
+> Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".  
+> Also supports units in centimeters ("cm") or millimeters ("mm").  
+> A special value "auto" can be used, which sets the target to  
+> the center of the model's bounding box in that dimension.  
+> Any time this value changes from its initially configured value,  
+> the camera will interpolate from its current position to the new value.
 
 2. cameraOrbit:
 
 use **controller.cameraOrbit(1.2, 1, 4)**
 
 > According to web-based features https://modelviewer.dev/examples:
-Set the starting and/or subsequent orbital position of the camera.  
-You can control the azimuthal, theta, and polar, phi, angles (phi is measured down from the top),  
-and the radius from the center of the model. Accepts values of the form "$theta $phi $radius",  
-like "10deg 75deg 1.5m". Also supports units in radians ("rad") for angles and centimeters ("cm") or  
-millimeters ("mm") for camera distance. Camera distance can also be set as a percentage ('%'),  
-where 100% gives the model tight framing within any window based on all possible theta and phi values.  
-Any time this value changes from its initially configured value, the camera will interpolate from its current  
-position to the new value. Any value set to 'auto' will revert to the default. For camera-orbit, camera-target  
-and field-of-view, parts of the property value can be configured with CSS-like functions. The CSS calc() function  
-is supported for these values, as well as a specialized form of the env() function. You can use env(window-scroll-y)  
-anywhere in the expression to get a number from 0-1 that corresponds to the current top-level scroll position of the  
-current frame. For example, a value like "calc(30deg - env(window-scroll-y) * 60deg) 75deg 1.5m" cause the camera to  
-orbit horizontally around the model as the user scrolls down the page.
+> Set the starting and/or subsequent orbital position of the camera.  
+> You can control the azimuthal, theta, and polar, phi, angles (phi is measured down from the top),  
+> and the radius from the center of the model. Accepts values of the form "$theta $phi $radius",  
+> like "10deg 75deg 1.5m". Also supports units in radians ("rad") for angles and centimeters ("cm")
+> or  
+> millimeters ("mm") for camera distance. Camera distance can also be set as a percentage ('%'),  
+> where 100% gives the model tight framing within any window based on all possible theta and phi
+> values.  
+> Any time this value changes from its initially configured value, the camera will interpolate from
+> its current  
+> position to the new value. Any value set to 'auto' will revert to the default. For camera-orbit,
+> camera-target  
+> and field-of-view, parts of the property value can be configured with CSS-like functions. The CSS
+> calc() function  
+> is supported for these values, as well as a specialized form of the env() function. You can use env(
+> window-scroll-y)  
+> anywhere in the expression to get a number from 0-1 that corresponds to the current top-level scroll
+> position of the  
+> current frame. For example, a value like "calc(30deg - env(window-scroll-y) * 60deg) 75deg 1.5m"
+> cause the camera to  
+> orbit horizontally around the model as the user scrolls down the page.
 
 ***other methods will be added as soon as possible.***
 
 ### Loading a bundled Flutter asset
 
 ```dart
-body: O3D(
+body: O3D
+(
 // ...
-  src: 'assets/MyModel.glb',
+src
+:
+'
+assets/MyModel.glb
+'
+,
 // ...
-),
+)
+,
 ```
 
 ### Loading a model from the file system
@@ -219,21 +243,35 @@ body: O3D(
 This is not avaliable on Web.
 
 ```dart
-body: O3D(
+body: O3D
+(
 // ...
-  src: 'file:///path/to/MyModel.glb',
+src
+:
+'
+file:///path/to/MyModel.glb
+'
+,
 // ...
-),
+)
+,
 ```
 
 ### Loading a model from the web
 
 ```dart
-body: O3D(
+body: O3D
+(
 // ...
-  src: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+src
+:
+'
+https://modelviewer.dev/shared-assets/models/Astronaut.glb
+'
+,
 // ...
-),
+)
+,
 ```
 
 Note that due to browsers' [CORS] security restrictions, the model file
@@ -249,7 +287,6 @@ render:
 1. It might not be possible to parse the provided glTF or GLB file.
    Some tools can produce invalid files when exporting glTF. Always
    run your model files through the [glTF Validator] to check for this.
-
 
 [CORS]:                     https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 
