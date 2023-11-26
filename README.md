@@ -13,30 +13,7 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
 online demo [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
 
-
-<div class="embed-container">
-    <iframe width="100%" height="600" 
- src="https://www.youtube.com/embed/YAOYXTLlXdw" 
- frameborder="0" allowfullscreen></iframe>
-</div>
-<style>
-.embed-container {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-}
-.embed-container iframe,
-.embed-container object,
-.embed-container embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-</style>
+{% include youtube.html %}
 
 <img src="https://assets.babakcode.com/flutter/packages/o3d/s1.gif" alt="o3d gif" width="100%" loading="lazy"/>  
 
