@@ -7,9 +7,10 @@ import '../implementation/o3d_stub_impl.dart'
 class O3dDataSource implements O3DControllerInterface {
   final O3dImp _o3dImp;
 
-  final WebViewController? webViewController;
+  WebViewController? webViewController;
+  String id;
 
-  O3dDataSource({this.webViewController, required String id})
+  O3dDataSource({this.webViewController, required this.id})
       : _o3dImp = O3dImp(webViewController: webViewController, id: id);
 
   @override
@@ -40,4 +41,13 @@ class O3dDataSource implements O3DControllerInterface {
 
   @override
   set variantName(String? set) => _o3dImp.variantName = set;
+
+  @override
+  Future<List<String>> availableAnimations() => _o3dImp.availableAnimations();
+
+  @override
+  void pause() => _o3dImp.pause();
+
+  @override
+  void play({int? repetitions}) => _o3dImp.play(repetitions: repetitions);
 }

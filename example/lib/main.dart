@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:example/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:o3d/o3d.dart';
@@ -117,8 +119,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text('Run'),
                 ),
                 FilledButton(
-                  onPressed: () => controller2.autoPlay = true,
+                  onPressed: () => controller2.play(repetitions: 1),
                   child: const Text('Play Animation'),
+                ),
+                FilledButton(
+                  onPressed: () async {
+                    log("Available animations: ${await controller2.availableAnimations()}");
+                  },
+                  child: const Text('available animations'),
                 ),
               ],
               o3d: O3D(
@@ -146,6 +154,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 FilledButton(
                   onPressed: () => controller3.animationName = 'Idle',
                   child: const Text('Idle'),
+                ),
+                FilledButton(
+                  onPressed: () {
+                    controller2.availableAnimations().then((value) => log("Available animations: $value"));
+                  },
+                  child: const Text('available animations'),
                 ),
               ],
               o3d: O3D(

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../interfaces/o3d_controller_interface.dart';
@@ -5,6 +7,7 @@ import '../interfaces/o3d_controller_interface.dart';
 class O3dImp implements O3DControllerInterface {
   final WebViewController? webViewController;
   final String id;
+
   O3dImp({
     this.webViewController,
     required this.id,
@@ -76,4 +79,28 @@ class O3dImp implements O3DControllerInterface {
       })();
     ''');
   }
+
+  @override
+  Future<List<String>> availableAnimations() async {
+    final res = await webViewController?.runJavaScriptReturningResult(
+        'document.querySelector(\'#$id\').availableAnimations');
+    return jsonDecode(res as String).cast<String>();
+  }
+
+  @override
+  void pause() {
+    webViewController?.runJavaScript('''(() => {
+        pause$id(); 
+      })();
+''');
+  }
+
+  @override
+  void play({int? repetitions}) {
+    webViewController?.runJavaScript('''(() => {
+        play$id({repetitions: $repetitions}); 
+      })();
+''');
+  }
+
 }

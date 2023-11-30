@@ -1,27 +1,36 @@
 # O3D - Model Viewer for Flutter
 
 This is a [Flutter](https://flutter.dev) widget for rendering interactive
-3D models in the [glTF](https://www.khronos.org/gltf/) and
-[GLB](https://wiki.fileformat.com/3d/glb/) formats.
-
+3D models in the [glTF](https://www.khronos.org/gltf/) and [GLB](https://wiki.fileformat.com/3d/glb/) formats.
 The widget embeds Google's [`<model-viewer>`](https://modelviewer.dev)
 web component in a [WebView](https://pub.dev/packages/webview_flutter).
+
+## Features
+
+1. `O3DController controller = O3DController();`
+2. cameraTarget: use **controller.cameraTarget(20, 20, 5)** `x, y, z`
+3. cameraOrbit: use **controller.cameraOrbit(1.2, 1, 4)** `(theta)deg, (phi)deg, (radius)m`
+4. availableAnimations: use **controller.availableAnimations().then((animations) => log("Available animations: $animations"));**
+5. play: use **controller.play()** `[optional] repetitions` => `play(repetitions: 2)`
+6. pause: use **controller.pause()**
+7. Renders glTF and GLB models. (Also, [USDZ] models on iOS 12+.)
+8. Supports animated models, with a configurable auto-play setting.
+9. Optionally supports launching the model into an [AR] viewer.
+10. Optionally auto-rotates the model, with a configurable delay.
+11. Supports a configurable background color for the widget.
+
+[USDZ]: https://graphics.pixar.com/usd/docs/Usdz-File-Format-Specification.html
+
+[AR]:   https://en.wikipedia.org/wiki/Augmented_reality
 
 
 ## Screenshot
 
-online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/)
+online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/) / [source code](https://babakcode.github.io/ui_3d_test/example)
 
-online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
+online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/) / [source code](https://github.com/babakcode/ui_3d_flutter)
 
-<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif" alt="Flutter 3d model" width="45%" loading="lazy"/>
-<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/zombie.gif" alt="Flutter 3d model" width="45%" loading="lazy"/>
-
-## Compatibility
-
-- Android
-- iOS (AR View may not available on iOS 16+)
-- Web, with [a recent system browser version](https://modelviewer.dev/#section-browser-support).
+<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif" alt="Flutter 3d model" width="45%" loading="lazy"/> <img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/zombie.gif" alt="Flutter 3d model" width="45%" loading="lazy"/>
 
 ## Installation
 
@@ -81,23 +90,17 @@ the key `io.flutter.embedded_views_preview` and the value `YES`:
 Modify the `<head>` tag of your `web/index.html` to load the JavaScript, like so:
 
 ```html
-
 <head>
-
     <!-- Other stuff -->
-
-    <script type="module"
-            src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"
-            defer></script>
+    <script type="module" src="./assets/packages/o3d/assets/model-viewer.min.js" defer></script>
 </head>
 ```
 
-`./assets/packages/model_viewer_plus/assets/model-viewer.min.js` will use the default js file which
-is included in this package's asset. The [official site](https://modelviewer.dev) uses unpkg, by
-using `https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js`, you are using the latest
-version of `<model-viewier>`. You may replace the
-value of `src` attribute with another CDN mirror's URL. But please notice that our model-viewer-plus
-maybe not able to keep up with the `<model-viewier>`'s latest version.
+## Compatibility
+
+- Android
+- iOS (AR View may not available on iOS 16+)
+- Web, with [a recent system browser version](https://modelviewer.dev/#section-browser-support).
 
 
 ## Notes
@@ -110,22 +113,6 @@ entry mode.
 If [Google Play Services for AR (ARCore, `com.google.ar.core`)](https://play.google.com/store/apps/details?id=com.google.ar.core)
 isn't present, Scene Viewer gracefully falls back to 3D mode as the entry mode.
 
-
-## Features
-
-- Renders glTF and GLB models. (Also, [USDZ] models on iOS 12+.)
-
-- Supports animated models, with a configurable auto-play setting.
-
-- Optionally supports launching the model into an [AR] viewer.
-
-- Optionally auto-rotates the model, with a configurable delay.
-
-- Supports a configurable background color for the widget.
-
-[USDZ]: https://graphics.pixar.com/usd/docs/Usdz-File-Format-Specification.html
-
-[AR]:   https://en.wikipedia.org/wiki/Augmented_reality
 
 ## Examples
 
@@ -169,104 +156,41 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
-### New feature is **controller**
-
-methods:
-
-1. cameraTarget:
-
-use **controller.cameraTarget(20, 20, 5)**
-
-> According to web-based features https://modelviewer.dev/examples: Set the starting and/or
-> subsequent point the camera orbits around.  
-> Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".  
-> Also supports units in centimeters ("cm") or millimeters ("mm").  
-> A special value "auto" can be used, which sets the target to  
-> the center of the model's bounding box in that dimension.  
-> Any time this value changes from its initially configured value,  
-> the camera will interpolate from its current position to the new value.
-
-2. cameraOrbit:
-
-use **controller.cameraOrbit(1.2, 1, 4)**
-
-> According to web-based features https://modelviewer.dev/examples:
-> Set the starting and/or subsequent orbital position of the camera.  
-> You can control the azimuthal, theta, and polar, phi, angles (phi is measured down from the top),  
-> and the radius from the center of the model. Accepts values of the form "$theta $phi $radius",  
-> like "10deg 75deg 1.5m". Also supports units in radians ("rad") for angles and centimeters ("cm")
-> or  
-> millimeters ("mm") for camera distance. Camera distance can also be set as a percentage ('%'),  
-> where 100% gives the model tight framing within any window based on all possible theta and phi
-> values.  
-> Any time this value changes from its initially configured value, the camera will interpolate from
-> its current  
-> position to the new value. Any value set to 'auto' will revert to the default. For camera-orbit,
-> camera-target  
-> and field-of-view, parts of the property value can be configured with CSS-like functions. The CSS
-> calc() function  
-> is supported for these values, as well as a specialized form of the env() function. You can use env(
-> window-scroll-y)  
-> anywhere in the expression to get a number from 0-1 that corresponds to the current top-level scroll
-> position of the  
-> current frame. For example, a value like "calc(30deg - env(window-scroll-y) * 60deg) 75deg 1.5m"
-> cause the camera to  
-> orbit horizontally around the model as the user scrolls down the page.
-
-***other methods will be added as soon as possible.***
-
 ### Loading a bundled Flutter asset
 
-```dart
-body: O3D
-(
-// ...
-src
-:
-'
-assets/MyModel.glb
-'
-,
-// ...
-)
-,
 ```
-
-### Loading a model from the file system
-
-This is not avaliable on Web.
-
-```dart
-body: O3D
-(
-// ...
-src
-:
-'
-file:///path/to/MyModel.glb
-'
-,
-// ...
-)
-,
+O3D.asset(
+  src: 'assets/MyModel.glb',
+  // ...
+),
 ```
 
 ### Loading a model from the web
 
-```dart
-body: O3D
-(
-// ...
-src
-:
-'
-https://modelviewer.dev/shared-assets/models/Astronaut.glb
-'
-,
-// ...
-)
-,
 ```
+body: O3D.network(
+   src:'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+   // ...
+),
+```
+
+### Loading a model from the file system
+
+This is not available on Web.
+
+```dart
+class HomePage extends StatelessWidget {
+   const HomePage({super.key});
+   
+   @override
+   Widget build(BuildContext context) {
+      return O3D(src: 'file:///path/to/MyModel.glb',
+      // ...
+      );
+   }
+}
+```
+
 
 Note that due to browsers' [CORS] security restrictions, the model file
 *must* be served with a `Access-Control-Allow-Origin: *` HTTP header.

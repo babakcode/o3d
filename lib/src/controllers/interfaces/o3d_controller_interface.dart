@@ -50,11 +50,23 @@ abstract class O3DControllerInterface {
 
   /// [autoPlay] for playing automatic animation
   /// `setter` func
+  @Deprecated('use play and pause instead!')
   set autoPlay(bool? set);
 
   /// [variantName] for model material
   /// `setter` func
   set variantName(String? variantName);
+
+  /// [play] Causes animations to be played, Can be use to switch animations as well.
+  /// If animationName is null and model has at list one animation, it will play first model's animation
+  /// If animationName passed and not null it will play specific animation
+  void play({int? repetitions});
+
+  /// [pause] Causes animations to be paused.
+  void pause();
+
+  /// It will return available animations list of 3D model as List<String>
+  Future<List<String>> availableAnimations();
 
   /// others will be added
 }

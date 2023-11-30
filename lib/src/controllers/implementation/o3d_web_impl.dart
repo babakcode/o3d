@@ -6,6 +6,7 @@ import '../interfaces/o3d_controller_interface.dart';
 class O3dImp implements O3DControllerInterface {
   final WebViewController? webViewController;
   final String id;
+
   O3dImp({
     this.webViewController,
     required this.id,
@@ -53,4 +54,16 @@ class O3dImp implements O3DControllerInterface {
   set variantName(String? variantName) {
     context.callMethod("variantName$id", [variantName]);
   }
+
+  @override
+  Future<List<String>> availableAnimations() async =>
+      ((await context.callMethod("availableAnimations$id"))).cast<String>();
+
+  @override
+  void pause() => context.callMethod("pause$id");
+
+  @override
+  void play({int? repetitions}) => context.callMethod("customEvaluate$id", [
+        '''(() => { play$id({repetitions: $repetitions}); })();'''
+      ]);
 }

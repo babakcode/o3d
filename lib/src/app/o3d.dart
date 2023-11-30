@@ -1,15 +1,129 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:o3d/o3d.dart';
-import 'package:o3d/src/controllers/interfaces/o3d_controller_interface.dart';
 import 'package:o3d/src/controllers/repositories/o3d_datasource_repository.dart';
-import 'package:o3d/src/entities/controller_entity.dart';
 import 'package:o3d/src/utils/utils.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import '../controllers/interfaces/o3d_controller_interface.dart';
 import 'model_viewer/o3d_model_viewer.dart';
 
 part '../controllers/controller.dart';
 
 class O3D extends StatefulWidget {
+  const O3D.asset(
+      {required this.src,
+      this.controller,
+      this.backgroundColor = Colors.transparent,
+      this.alt,
+      this.poster,
+      this.loading,
+      this.reveal,
+      this.withCredentials,
+      this.ar,
+      this.arModes,
+      this.arScale,
+      this.arPlacement,
+      this.iosSrc,
+      this.xrEnvironment,
+      this.cameraControls = true,
+      this.disablePan,
+      this.disableTap,
+      this.touchAction,
+      this.disableZoom,
+      this.orbitSensitivity,
+      this.autoRotate,
+      this.autoRotateDelay,
+      this.rotationPerSecond,
+      this.interactionPrompt,
+      this.interactionPromptStyle,
+      this.interactionPromptThreshold,
+      this.cameraOrbit,
+      this.cameraTarget,
+      this.fieldOfView,
+      this.maxCameraOrbit,
+      this.minCameraOrbit,
+      this.maxFieldOfView,
+      this.minFieldOfView,
+      this.interpolationDecay,
+      this.skyboxImage,
+      this.environmentImage,
+      this.exposure,
+      this.shadowIntensity,
+      this.shadowSoftness,
+      this.animationName,
+      this.animationCrossfadeDuration,
+      this.autoPlay,
+      this.variantName,
+      this.orientation,
+      this.scale,
+      this.minHotspotOpacity,
+      this.maxHotspotOpacity,
+      this.innerModelViewerHtml,
+      this.relatedCss,
+      this.relatedJs,
+      this.id,
+      this.debugLogging = false,
+      this.javascriptChannels,
+      this.onWebViewCreated,
+      super.key});
+
+  const O3D.network(
+      {required this.src,
+      this.controller,
+      this.backgroundColor = Colors.transparent,
+      this.alt,
+      this.poster,
+      this.loading,
+      this.reveal,
+      this.withCredentials,
+      this.ar,
+      this.arModes,
+      this.arScale,
+      this.arPlacement,
+      this.iosSrc,
+      this.xrEnvironment,
+      this.cameraControls = true,
+      this.disablePan,
+      this.disableTap,
+      this.touchAction,
+      this.disableZoom,
+      this.orbitSensitivity,
+      this.autoRotate,
+      this.autoRotateDelay,
+      this.rotationPerSecond,
+      this.interactionPrompt,
+      this.interactionPromptStyle,
+      this.interactionPromptThreshold,
+      this.cameraOrbit,
+      this.cameraTarget,
+      this.fieldOfView,
+      this.maxCameraOrbit,
+      this.minCameraOrbit,
+      this.maxFieldOfView,
+      this.minFieldOfView,
+      this.interpolationDecay,
+      this.skyboxImage,
+      this.environmentImage,
+      this.exposure,
+      this.shadowIntensity,
+      this.shadowSoftness,
+      this.animationName,
+      this.animationCrossfadeDuration,
+      this.autoPlay,
+      this.variantName,
+      this.orientation,
+      this.scale,
+      this.minHotspotOpacity,
+      this.maxHotspotOpacity,
+      this.innerModelViewerHtml,
+      this.relatedCss,
+      this.relatedJs,
+      this.id,
+      this.debugLogging = false,
+      this.javascriptChannels,
+      this.onWebViewCreated,
+      super.key});
+
   const O3D(
       {this.controller,
       required this.src,
@@ -611,20 +725,19 @@ class O3D extends StatefulWidget {
 }
 
 class _O3DState extends State<O3D> {
-  late String relatedJs;
-  late String id;
-
-  Utils utils = Utils();
-  late O3DController controller;
+  late String _relatedJs;
+  late String _id;
+  final Utils _utils = Utils();
+  late final O3DController _controller;
 
   @override
   void initState() {
+    _id = widget.id ?? _utils.generateId;
+    _relatedJs = widget.relatedJs ?? "";
+    _relatedJs = _utils.relatedJs(id: _id) + _relatedJs;
+    _controller = (widget.controller ?? O3DController())
+      .._dataSource = O3dDataSource(id: _id);
     super.initState();
-    id = widget.id ?? utils.generateId;
-    relatedJs = widget.relatedJs ?? "";
-    relatedJs = utils.relatedJs(id: id) + relatedJs;
-    controller = widget.controller ?? O3DController();
-    controller._init(ControllerEntity(id: id));
   }
 
   @override
@@ -679,16 +792,15 @@ class _O3DState extends State<O3D> {
       maxHotspotOpacity: widget.maxHotspotOpacity,
       innerModelViewerHtml: widget.innerModelViewerHtml,
       relatedCss: widget.relatedCss,
-      relatedJs: relatedJs,
-      id: id,
+      relatedJs: _relatedJs,
+      id: _id,
       debugLogging: widget.debugLogging ?? false,
       // overwriteNodeValidatorBuilder: widget.overwriteNodeValidatorBuilder,
       javascriptChannels: widget.javascriptChannels,
       onWebViewCreated: (data) {
         widget.onWebViewCreated?.call(data);
-        controller._controllerEntity.webViewController = data;
-        controller._initDataSource =
-            O3dDataSource(webViewController: data, id: id);
+        _controller._dataSource =
+            O3dDataSource(id: _id, webViewController: data);
       },
     );
   }

@@ -1,15 +1,8 @@
 part of '../app/o3d.dart';
 
 class O3DController implements O3DControllerInterface {
-  late ControllerEntity _controllerEntity;
-  late O3dDataSource _dataSource = O3dDataSource(
-      id: _controllerEntity.id,
-      webViewController: _controllerEntity.webViewController);
-
-  void _init(ControllerEntity controllerEntity) =>
-      _controllerEntity = controllerEntity;
-
-  set _initDataSource(O3dDataSource source) => _dataSource = source;
+  // late ControllerEntity _entity;
+  late O3dDataSource _dataSource;
 
   @override
   void cameraOrbit(double theta, double phi, double radius) =>
@@ -37,6 +30,16 @@ class O3DController implements O3DControllerInterface {
   @override
   set variantName(String? set) => _dataSource.variantName = set;
 
+  @Deprecated('use play() and pause() methods instead!')
   @override
   set autoPlay(bool? set) => _dataSource.autoPlay = set;
+
+  @override
+  Future<List<String>> availableAnimations() => _dataSource.availableAnimations();
+
+  @override
+  void pause() => _dataSource.pause();
+
+  @override
+  void play({int? repetitions}) => _dataSource.play(repetitions: repetitions);
 }
