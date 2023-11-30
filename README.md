@@ -7,14 +7,21 @@ This is a [Flutter](https://flutter.dev) widget for rendering interactive
 The widget embeds Google's [`<model-viewer>`](https://modelviewer.dev)
 web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
+
+https://github.com/babakcode/o3d/assets/31356659/5c9faddf-f0b7-41b5-a703-0035718ecf57
+
+
+
+
 ## Screenshot
 
 online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/)
+
 online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
 
 <a href="https://www.youtube.com/watch?v=YAOYXTLlXdw"><img src="./_includes/s.jpg" width="100%" alt="O3D package update 3.0.0"></a>
 
-<img src="https://assets.babakcode.com/flutter/packages/o3d/s1.gif" alt="o3d gif" width="100%" loading="lazy"/>  
+https://github.com/babakcode/o3d/assets/31356659/5c9faddf-f0b7-41b5-a703-0035718ecf57
 
 |                                                  old man                                                  |                                                                   Astronaut                                                                    |  
 |:---------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|  
