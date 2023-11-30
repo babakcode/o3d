@@ -32,13 +32,20 @@ online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.gi
 
 <img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif" alt="Flutter 3d model" width="45%" loading="lazy"/> <img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/zombie.gif" alt="Flutter 3d model" width="45%" loading="lazy"/>
 
+## projects
+
+| projects | babak code                                                                                                                                                      | Tassio Gustavo                                                                                                                                                                                                                                                                                     | besenior - Mohammad Aghajani                                                                                                                                                                                                                  | Vaibhav Chandolia                                                                                                                                                                                         |
+|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| image    | <a href="https://youtu.be/-W45PQ__SAk" target="_blank"><img src="https://img.youtube.com/vi/-W45PQ__SAk/0.jpg" alt="BabakCode" width="30%" loading="lazy"/></a> | <a href="https://www.linkedin.com/posts/tassiogustavo_flutter-dart-ugcPost-7131042089257103361-0LY_?utm_source=share&utm_medium=member_desktop" target="_blank"><img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/scared.gif" alt="BabakCode" width="30%" loading="lazy"/></a> | <a href="https://youtube.com/shorts/4Ys7vt2bIvw?si=tQBPWVWrB7l8Dozn" target="_blank"><img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/besenior.png" alt="besenior - Mohammad Aghajani" width="30%" loading="lazy" /></a> | <a href="https://youtu.be/DTenaCTOSzE?si=ChoTTGnx9smY70ds" target="_blank"><img src="https://img.youtube.com/vi/DTenaCTOSzE/0.jpg" alt="Vaibhav Chandolia youtube video" width="30%" loading="lazy"/></a> |
+| links    | <a href="https://youtu.be/-W45PQ__SAk" target="_blank">youtube video link</a>                                                                                   | <a href="https://www.linkedin.com/posts/tassiogustavo_flutter-dart-ugcPost-7131042089257103361-0LY_?utm_source=share&utm_medium=member_desktop" target="_blank">linkedin post link</a>                                                                                                             | <a href="https://youtube.com/shorts/4Ys7vt2bIvw?si=tQBPWVWrB7l8Dozn" target="_blank">Youtube persian content (besenior) - Mohammad Aghajani</a>                                                                                               | <a href="https://youtu.be/DTenaCTOSzE?si=ChoTTGnx9smY70ds" target="_blank">Youtube channel</a>                                                                                                            |
+
 ## Installation
 
-### `pubspec.yaml`
+in `pubspec.yaml`
 
 ```yaml
 dependencies:
-  o3d: 3.0.0
+  o3d: ^3.1.0
 ```
 
 ### `AndroidManifest.xml` (Android 9+ only)
@@ -62,7 +69,7 @@ so you will need to configure your app's `android/app/src/main/AndroidManifest.x
             android:name=".MainActivity"
 ```
 
-This does not affect Android 8 and earlier. See [#7] for more information.
+This does not affect Android 8 and earlier.
 
 ### `app/build.gradle` (Android only)
 
@@ -124,11 +131,11 @@ import 'package:o3d/o3d.dart';
 
 ### Creating a `O3D` widget
 
-```diff
+```dart
 class _MyHomePageState extends State<MyHomePage> {
   
   // to control the animation
-+ O3DController controller = O3DController();
+  O3DController controller = O3DController();
 
   @override
   Widget build(BuildContext context) {
@@ -139,18 +146,18 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
               onPressed: () => 
-+                 controller.cameraOrbit(20, 20, 5),
+                  controller.cameraOrbit(20, 20, 5),
               icon: const Icon(Icons.change_circle)),
           IconButton(
               onPressed: () =>
-+                 controller.cameraTarget(1.2, 1, 4), 
+                  controller.cameraTarget(1.2, 1, 4), 
               icon: const Icon(Icons.change_circle_outlined)),
         ],
       ),
-+     body: O3D(
-+       controller: controller,
-+       src: 'assets/glb/jeff_johansen_idle.glb',
-+     ),
+      body: O3D.asset(
+         src: 'assets/glb/jeff_johansen_idle.glb', 
+         controller: controller,
+      ),
     );
   }
 }
