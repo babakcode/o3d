@@ -8,11 +8,6 @@ The widget embeds Google's [`<model-viewer>`](https://modelviewer.dev)
 web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
 
-https://github.com/babakcode/o3d/assets/31356659/5c9faddf-f0b7-41b5-a703-0035718ecf57
-
-
-
-
 ## Screenshot
 
 online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/)
