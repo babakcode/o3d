@@ -17,10 +17,6 @@ online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.gi
 <img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif" alt="Flutter 3d model" width="45%" loading="lazy"/>
 <img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/zombie.gif" alt="Flutter 3d model" width="45%" loading="lazy"/>
 
-|                                              shoe                                              |                                               zombie                                               |
-|:----------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
-|   ![Flutter 3d model](https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif)    | ![Flutter 3d model](https://assets.babakcode.com/flutter/projects/ui_3d_flutter/o3d-v3-zombie.gif) |
-
 ## Compatibility
 
 - Android
