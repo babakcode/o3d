@@ -14,12 +14,12 @@ online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.githu
 
 online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
 
-<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/o3d-v3-git.gif" alt="Flutter 3d model" width="49%" loading="lazy"/>
-<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/o3d-v3-zombie.gif" alt="Flutter 3d model" width="49%" loading="lazy"/>
+<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif" alt="Flutter 3d model" width="49%" loading="lazy"/>
+<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/zombie.gif" alt="Flutter 3d model" width="49%" loading="lazy"/>
 
-|                                              shoe                                               |                                               zombie                                               |
-|:-----------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
-| ![Flutter 3d model](https://assets.babakcode.com/flutter/projects/ui_3d_flutter/o3d-v3-git.gif) | ![Flutter 3d model](https://assets.babakcode.com/flutter/projects/ui_3d_flutter/o3d-v3-zombie.gif) |
+|                                              shoe                                              |                                               zombie                                               |
+|:----------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
+|   ![Flutter 3d model](https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif)    | ![Flutter 3d model](https://assets.babakcode.com/flutter/projects/ui_3d_flutter/o3d-v3-zombie.gif) |
 
 ## Compatibility
 
