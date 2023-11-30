@@ -19,15 +19,8 @@ online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.githu
 
 online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
 
-<a href="https://www.youtube.com/watch?v=YAOYXTLlXdw"><img src="./_includes/s.jpg" width="100%" alt="O3D package update 3.0.0"></a>
-
-https://github.com/babakcode/o3d/assets/31356659/5c9faddf-f0b7-41b5-a703-0035718ecf57
-
-|                                                  old man                                                  |                                                                   Astronaut                                                                    |  
-|:---------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------:|  
-| <img src="https://assets.babakcode.com/flutter/packages/o3d/s2.png" alt="o3d screenshot 1" width="100%"/> | <img src="https://raw.githubusercontent.com/omchiii/model_viewer_plus.dart/master/example/flutter_01.png" alt="o3d screenshot 1" width="40%"/> |  
-
-![o3d screenshot 1](https://raw.githubusercontent.com/omchiii/model_viewer_plus.dart/master/example/flutter_02.png)
+<img src="https://babakcode.github.io/assets/o3d-v3-git.gif" alt="o3d screenshot 1" width="49%"/>
+<img src="https://babakcode.github.io/assets/o3d-v3-zombie.gif" alt="o3d screenshot 1" width="49%"/>
 
 ## Compatibility
 
