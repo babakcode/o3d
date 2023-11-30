@@ -14,8 +14,8 @@ online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.githu
 
 online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/)
 
-<img src="https://babakcode.github.io/assets/o3d-v3-git.gif" alt="o3d screenshot 1" width="49%" loading="lazy"/>
-<img src="https://babakcode.github.io/assets/o3d-v3-zombie.gif" alt="o3d screenshot 1" width="49%" loading="lazy"/>
+<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/o3d-v3-git.gif" alt="Flutter 3d model" width="49%" loading="lazy"/>
+<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/o3d-v3-zombie.gif" alt="Flutter 3d model" width="49%" loading="lazy"/>
 
 ## Compatibility
 
