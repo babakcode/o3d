@@ -5,11 +5,9 @@ homepage: https://github.com/babakcode/o3d
 topics:
   - "model"
   - "models3d"
-  - "flutter-3d"
   - "flutter3d"
   - "models-3d"
   - "glb"
-  - "gltf"
 
 screenshots:
   - description: 'Examples of the o3d package.'
