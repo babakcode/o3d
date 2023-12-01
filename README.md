@@ -5,6 +5,14 @@ This is a [Flutter](https://flutter.dev) widget for rendering interactive
 The widget embeds Google's [`<model-viewer>`](https://modelviewer.dev)
 web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
+## Screenshot
+
+online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/) / [source code](https://babakcode.github.io/ui_3d_test/example)
+
+online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/) / [source code](https://github.com/babakcode/ui_3d_flutter)
+
+<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif" alt="Flutter 3d model" width="45%" loading="lazy"/> <img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/zombie.gif" alt="Flutter 3d model" width="45%" loading="lazy"/>
+
 ## Features
 
 1. `O3DController controller = O3DController();`
@@ -24,24 +32,6 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 [AR]:   https://en.wikipedia.org/wiki/Augmented_reality
 
 
-## Screenshot
-
-online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/) / [source code](https://babakcode.github.io/ui_3d_test/example)
-
-online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/) / [source code](https://github.com/babakcode/ui_3d_flutter)
-
-<img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/shoe.gif" alt="Flutter 3d model" width="45%" loading="lazy"/> <img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/zombie.gif" alt="Flutter 3d model" width="45%" loading="lazy"/>
-
-## projects
-
-<div style="overflow-x: scroll">
-
-| babak code                                                                                                                                                       | Tassio Gustavo                                                                                                                                                                                                                                                                                       | Vaibhav Chandolia                                                                                                                                                                                          |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <a href="https://youtu.be/-W45PQ__SAk" target="_blank"><img src="https://img.youtube.com/vi/-W45PQ__SAk/0.jpg" alt="BabakCode" width="100%" loading="lazy"/></a> | <a href="https://www.linkedin.com/posts/tassiogustavo_flutter-dart-ugcPost-7131042089257103361-0LY_?utm_source=share&utm_medium=member_desktop" target="_blank"><img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/scared.gif" alt="BabakCode" width="100%"  loading="lazy"/></a> | <a href="https://youtu.be/DTenaCTOSzE?si=ChoTTGnx9smY70ds" target="_blank"><img src="https://img.youtube.com/vi/DTenaCTOSzE/0.jpg" alt="Vaibhav Chandolia youtube video" width="100%" loading="lazy"/></a> |
-| <a href="https://youtu.be/-W45PQ__SAk" target="_blank">youtube video link</a>                                                                                    | <a href="https://www.linkedin.com/posts/tassiogustavo_flutter-dart-ugcPost-7131042089257103361-0LY_?utm_source=share&utm_medium=member_desktop" target="_blank">linkedin post link</a>                                                                                                               | <a href="https://youtu.be/DTenaCTOSzE?si=ChoTTGnx9smY70ds" target="_blank">Youtube channel</a>                                                                                                             |
-
-</div>
 
 ## Installation
 
@@ -106,24 +96,6 @@ Modify the `<head>` tag of your `web/index.html` to load the JavaScript, like so
     <script type="module" src="./assets/packages/o3d/assets/model-viewer.min.js" defer></script>
 </head>
 ```
-
-## Compatibility
-
-- Android
-- iOS (AR View may not available on iOS 16+)
-- Web, with [a recent system browser version](https://modelviewer.dev/#section-browser-support).
-
-
-## Notes
-
-We use
-the [Google APP](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox)
-, `com.google.android.googlequicksearchbox` to display interactive 3D models on Android.
-The model displays in 'ar_preferred' mode by default, Scene Viewer launches in AR native mode as the
-entry mode.
-If [Google Play Services for AR (ARCore, `com.google.ar.core`)](https://play.google.com/store/apps/details?id=com.google.ar.core)
-isn't present, Scene Viewer gracefully falls back to 3D mode as the entry mode.
-
 
 ## Examples
 
@@ -201,6 +173,35 @@ class HomePage extends StatelessWidget {
    }
 }
 ```
+
+## projects
+
+<div style="overflow-x: scroll">
+
+| babak code                                                                                                                                                       | Tassio Gustavo                                                                                                                                                                                                                                                                                       | Vaibhav Chandolia                                                                                                                                                                                          |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <a href="https://youtu.be/-W45PQ__SAk" target="_blank"><img src="https://img.youtube.com/vi/-W45PQ__SAk/0.jpg" alt="BabakCode" width="100%" loading="lazy"/></a> | <a href="https://www.linkedin.com/posts/tassiogustavo_flutter-dart-ugcPost-7131042089257103361-0LY_?utm_source=share&utm_medium=member_desktop" target="_blank"><img src="https://assets.babakcode.com/flutter/projects/ui_3d_flutter/scared.gif" alt="BabakCode" width="100%"  loading="lazy"/></a> | <a href="https://youtu.be/DTenaCTOSzE?si=ChoTTGnx9smY70ds" target="_blank"><img src="https://img.youtube.com/vi/DTenaCTOSzE/0.jpg" alt="Vaibhav Chandolia youtube video" width="100%" loading="lazy"/></a> |
+| <a href="https://youtu.be/-W45PQ__SAk" target="_blank">youtube video link</a>                                                                                    | <a href="https://www.linkedin.com/posts/tassiogustavo_flutter-dart-ugcPost-7131042089257103361-0LY_?utm_source=share&utm_medium=member_desktop" target="_blank">linkedin post link</a>                                                                                                               | <a href="https://youtu.be/DTenaCTOSzE?si=ChoTTGnx9smY70ds" target="_blank">Youtube channel</a>                                                                                                             |
+
+</div>
+
+## Compatibility
+
+- Android
+- iOS (AR View may not available on iOS 16+)
+- Web, with [a recent system browser version](https://modelviewer.dev/#section-browser-support).
+
+
+## Notes
+
+We use
+the [Google APP](https://play.google.com/store/apps/details?id=com.google.android.googlequicksearchbox)
+, `com.google.android.googlequicksearchbox` to display interactive 3D models on Android.
+The model displays in 'ar_preferred' mode by default, Scene Viewer launches in AR native mode as the
+entry mode.
+If [Google Play Services for AR (ARCore, `com.google.ar.core`)](https://play.google.com/store/apps/details?id=com.google.ar.core)
+isn't present, Scene Viewer gracefully falls back to 3D mode as the entry mode.
+
 
 
 Note that due to browsers' [CORS] security restrictions, the model file

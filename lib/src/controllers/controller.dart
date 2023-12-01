@@ -1,7 +1,7 @@
 part of '../app/o3d.dart';
 
 class O3DController implements O3DControllerInterface {
-  // late ControllerEntity _entity;
+
   late O3dDataSource _dataSource;
 
   @override
@@ -35,7 +35,8 @@ class O3DController implements O3DControllerInterface {
   set autoPlay(bool? set) => _dataSource.autoPlay = set;
 
   @override
-  Future<List<String>> availableAnimations() => _dataSource.availableAnimations();
+  Future<List<String>> availableAnimations() =>
+      _dataSource.availableAnimations();
 
   @override
   void pause() => _dataSource.pause();

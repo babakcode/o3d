@@ -1,3 +1,7 @@
+## 3.1.0
+
+* ### new features
+* added `availableAnimations`, `play({repetitions})`, `pause()` methods
 
 ## 3.0.0
 

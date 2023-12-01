@@ -63,7 +63,6 @@ class O3dImp implements O3DControllerInterface {
   void pause() => context.callMethod("pause$id");
 
   @override
-  void play({int? repetitions}) => context.callMethod("customEvaluate$id", [
-        '''(() => { play$id({repetitions: $repetitions}); })();'''
-      ]);
+  void play({int? repetitions}) => context.callMethod("customEvaluate$id",
+      ['''(() => { play$id({repetitions: $repetitions}); })();''']);
 }

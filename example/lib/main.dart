@@ -157,7 +157,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 FilledButton(
                   onPressed: () {
-                    controller2.availableAnimations().then((value) => log("Available animations: $value"));
+                    controller2
+                        .availableAnimations()
+                        .then((value) => log("Available animations: $value"));
                   },
                   child: const Text('available animations'),
                 ),
