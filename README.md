@@ -7,7 +7,7 @@ web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
 ## Screenshot
 
-online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/) / [source code](https://babakcode.github.io/ui_3d_test/example)
+online demo 1: [https://babakcode.github.io/ui_3d_test/](https://babakcode.github.io/ui_3d_test/) / [source code](https://github.com/babakcode/o3d/tree/master/example) 
 
 online demo 2: [https://babakcode.github.io/ui_3d_flutter/](https://babakcode.github.io/ui_3d_flutter/) / [source code](https://github.com/babakcode/ui_3d_flutter)
 
