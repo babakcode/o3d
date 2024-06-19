@@ -5,7 +5,7 @@ This is a [Flutter](https://flutter.dev) widget for rendering interactive
 The widget embeds Google's [`<model-viewer>`](https://modelviewer.dev)
 web component in a [WebView](https://pub.dev/packages/webview_flutter).
 
-<img src="https://github.com/babakcode/o3d/assets/31356659/ff89d844-d57b-4f41-a0b4-2e0f66c795bc" width="100%" alt="Flutter 3D model viewer with O3D"/>
+<img src="https://github.com/babakcode/o3d/assets/31356659/ff89d844-d57b-4f41-a0b4-2e0f66c795bc" width="100%" alt="Flutter 3D model viewer with O3D" loading="lazy"/>
 
 ## Screenshot
 

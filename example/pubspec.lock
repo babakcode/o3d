@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: android_intent_plus
-      sha256: e1c62bb41c90e15083b7fb84dc327fe90396cc9c1445b55ff1082144fabfb4d9
+      sha256: "2bfdbee8d65e7c26f88b66f0a91f2863da4d3596d8a658b4162c8de5cf04b074"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.3"
+    version: "5.0.2"
   async:
     dependency: transitive
     description:
@@ -150,7 +150,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "3.1.0"
+    version: "3.1.1"
   path:
     dependency: transitive
     description:
@@ -232,26 +232,26 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: b1c9e98774adf8820c96fbc7ae3601231d324a7d5ebd8babe27b6dfac91357ba
+      sha256: "21b704ce5fa560ea9f3b525b43601c678728ba46725bab9b01187b4831377ed3"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.1"
+    version: "6.3.0"
   url_launcher_android:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "31222ffb0063171b526d3e569079cf1f8b294075ba323443fdc690842bfd4def"
+      sha256: "17cd5e205ea615e2c6ea7a77323a11712dffa0720a8a90540db57a01347f9ad9"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.0"
+    version: "6.3.2"
   url_launcher_ios:
     dependency: transitive
     description:
       name: url_launcher_ios
-      sha256: bba3373219b7abb6b5e0d071b0fe66dfbe005d07517a68e38d4fc3638f35c6d3
+      sha256: "7068716403343f6ba4969b4173cbf3b84fc768042124bc2c011e5d782b24fe89"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.1"
+    version: "6.3.0"
   url_launcher_linux:
     dependency: transitive
     description:
@@ -272,10 +272,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_platform_interface
-      sha256: "980e8d9af422f477be6948bdfb68df8433be71f5743a188968b0c1b887807e50"
+      sha256: "552f8a1e663569be95a8190206a38187b531910283c3e982193e4f2733f01029"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.2"
   url_launcher_web:
     dependency: transitive
     description:
@@ -308,38 +308,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "13.0.0"
+  web:
+    dependency: transitive
+    description:
+      name: web
+      sha256: "97da13628db363c635202ad97068d47c5b8aa555808e7a9411963c533b449b27"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.1"
   webview_flutter:
     dependency: transitive
     description:
       name: webview_flutter
-      sha256: "42393b4492e629aa3a88618530a4a00de8bb46e50e7b3993fedbfdc5352f0dbf"
+      sha256: "6869c8786d179f929144b4a1f86e09ac0eddfe475984951ea6c634774c16b522"
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.2"
+    version: "4.8.0"
   webview_flutter_android:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: "8326ee235f87605a2bfc444a4abc897f4abc78d83f054ba7d3d1074ce82b4fbf"
+      sha256: "0d21cfc3bfdd2e30ab2ebeced66512b91134b39e72e97b43db2d47dda1c4e53a"
       url: "https://pub.dev"
     source: hosted
-    version: "3.12.1"
+    version: "3.16.3"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
-      sha256: adb8c03c2be231bea5a8ed0e9039e9d18dbb049603376beaefa15393ede468a5
+      sha256: d937581d6e558908d7ae3dc1989c4f87b786891ab47bb9df7de548a151779d8d
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.0"
+    version: "2.10.0"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: accdaaa49a2aca2dc3c3230907988954cdd23fed0a19525d6c9789d380f4dc76
+      sha256: "7affdf9d680c015b11587181171d3cad8093e449db1f7d9f0f08f4f33d24f9a0"
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.4"
+    version: "3.13.1"
 sdks:
-  dart: ">=3.2.0-0 <4.0.0"
-  flutter: ">=3.13.0"
+  dart: ">=3.3.0 <4.0.0"
+  flutter: ">=3.16.6"

@@ -7,7 +7,7 @@ topics:
   - "models3d"
   - "flutter3d"
   - "glb"
-  - "3d"
+  - "model3d"
 
 screenshots:
   - description: 'Examples of the o3d package.'
