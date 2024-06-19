@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:o3d/o3d.dart';
 import 'package:o3d/src/controllers/repositories/o3d_datasource_repository.dart';
@@ -14,6 +13,7 @@ class O3D extends StatefulWidget {
       {required this.src,
       this.controller,
       this.backgroundColor = Colors.transparent,
+      this.progressBarColor,
       this.alt,
       this.poster,
       this.loading,
@@ -71,6 +71,7 @@ class O3D extends StatefulWidget {
       {required this.src,
       this.controller,
       this.backgroundColor = Colors.transparent,
+      this.progressBarColor,
       this.alt,
       this.poster,
       this.loading,
@@ -128,6 +129,7 @@ class O3D extends StatefulWidget {
       {this.controller,
       required this.src,
       this.backgroundColor = Colors.transparent,
+      this.progressBarColor,
       this.alt,
       this.poster,
       this.loading,
@@ -609,6 +611,10 @@ class O3D extends StatefulWidget {
   /// Defaults to [Colors.transparent].
   final Color backgroundColor;
 
+  /// The backgroundColor of the [O3DModelViewer]'s WebView.
+  /// Defaults to [Colors.transparent].
+  final Color? progressBarColor;
+
   // Augmented Related CSS
 
   /// This read-only attribute enables DOM content to be styled based on the
@@ -743,6 +749,10 @@ class _O3DState extends State<O3D> {
   @override
   Widget build(BuildContext context) {
     return O3DModelViewer(
+      //If you don't pass progressBarColor the color of defaultLoadingProgressBar will be grey.
+      //You can set your custom color or use [Colors.transparent] for hiding loadingProgressBar.
+      progressBarColor:
+          widget.progressBarColor ?? Theme.of(context).colorScheme.onPrimary,
       src: widget.src,
       controller: widget.controller,
       backgroundColor: widget.backgroundColor,

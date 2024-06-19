@@ -121,10 +121,10 @@ class ModelViewerState extends State<O3DModelViewer> {
       variantName: widget.variantName,
       orientation: widget.orientation,
       scale: widget.scale,
-
       // CSS Styles
       backgroundColor: widget.backgroundColor,
-
+      // Default progress bar color
+      progressBarColor: widget.progressBarColor,
       // Annotations CSS
       minHotspotOpacity: widget.minHotspotOpacity,
       maxHotspotOpacity: widget.maxHotspotOpacity,

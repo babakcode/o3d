@@ -1,6 +1,14 @@
 ## 3.1.0
 
 * ### new features
+* added `availableAnimations`, `play({repetitions})`, `pause()` methods 
+* Switch between textures
+* Get available textures list
+* Set default loading progressbar color
+
+## 3.1.0
+
+* ### new features
 * added `availableAnimations`, `play({repetitions})`, `pause()` methods
 
 ## 3.0.0

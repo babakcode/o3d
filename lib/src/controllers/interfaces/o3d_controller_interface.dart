@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:o3d/src/controllers/implementation/o3d_stub_impl.dart'
+    if (dart.library.js) "package:o3d/src/controllers/implementation/o3d_web_impl.dart";
 
 abstract class O3DControllerInterface {
   /// [customJsCode]
@@ -22,6 +24,10 @@ abstract class O3DControllerInterface {
   /// orbit horizontally around the model as the user scrolls down the page.
   void cameraOrbit(double theta, double phi, double radius);
 
+  /// [resetCameraOrbit]
+  /// Causes camera target reset to default value
+  void resetCameraOrbit();
+
   /// [cameraTarget] function
   /// Set the starting and/or subsequent point the camera orbits around.
   /// Accepts values of the form "$X $Y $Z", like "0m 1.5m -0.5m".
@@ -31,6 +37,10 @@ abstract class O3DControllerInterface {
   /// Any time this value changes from its initially configured value,
   /// the camera will interpolate from its current position to the new value.
   void cameraTarget(double x, double y, double z);
+
+  /// [resetCameraTarget]
+  /// Causes camera orbit reset to default value
+  void resetCameraTarget();
 
   /// [logger] for testing package in release mode
   ValueChanged<Object>? logger;
@@ -65,8 +75,21 @@ abstract class O3DControllerInterface {
   /// [pause] Causes animations to be paused.
   void pause();
 
+  /// [resetAnimation]
+  /// Causes animation to be played from first frame
+  void resetAnimation();
+
   /// It will return available animations list of 3D model as List<String>
   Future<List<String>> availableAnimations();
+
+  /// It will return available animations list of 3D model as List<String>
+  Future<List<String>> availableVariants();
+
+  ///It will execute custom JS code and returns result
+  Future<dynamic> executeCustomJsCodeWithResult(String code);
+
+  factory O3DControllerInterface({required String id, webViewController}) =>
+      O3dImp(id: id, webViewController: webViewController);
 
   /// others will be added
 }

@@ -63,6 +63,8 @@ abstract class HTMLBuilder {
     // CSS Styles
     final Color backgroundColor = Colors.transparent,
 
+    /// default progress bar color
+    final Color? progressBarColor,
     // Annotations CSS
     final num? minHotspotOpacity,
     final num? maxHotspotOpacity,
@@ -359,6 +361,12 @@ abstract class HTMLBuilder {
       ..write(
         'background-color: rgba(${backgroundColor.red}, ${backgroundColor.green}, ${backgroundColor.blue}, ${backgroundColor.alpha}); ',
       );
+    modelViewerHtml.write(' --progress-bar-color: transparent');
+    //Default Progress bar color
+    if (progressBarColor != null) {
+      modelViewerHtml.write(
+          ' --progress-bar-color: rgba(${progressBarColor.red}, ${progressBarColor.green}, ${progressBarColor.blue}, ${progressBarColor.alpha})');
+    }
 
     // Annotations CSS
     // --min-hotspot-opacity
@@ -379,7 +387,7 @@ abstract class HTMLBuilder {
 
     modelViewerHtml.write(' id="${htmlEscape.convert(id)}"');
 
-    modelViewerHtml.writeln('>'); // close the previous tag of omodel-viewer
+    modelViewerHtml.writeln('>'); // close the previous tag of model-viewer
     if (innerModelViewerHtml != null) {
       modelViewerHtml.writeln(innerModelViewerHtml);
     }

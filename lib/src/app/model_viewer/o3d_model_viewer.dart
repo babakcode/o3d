@@ -3,8 +3,8 @@ import 'package:o3d/o3d.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../src/app/model_viewer/model_viewer_plus_stub.dart'
     if (dart.library.io) 'model_viewer_plus_mobile.dart'
-    if (dart.library.js) 'model_viewer_plus_web.dart';
-import '../fake/dart_html_fake.dart' if (dart.library.html) 'dart:html';
+    if (dart.library.js_interop) 'model_viewer_plus_web.dart';
+import '../fake/dart_html_fake.dart' if (dart.library.js_interop) 'dart:html';
 
 /// Flutter widget for rendering interactive 3D models.
 class O3DModelViewer extends StatefulWidget {
@@ -12,6 +12,7 @@ class O3DModelViewer extends StatefulWidget {
     this.controller,
     required this.src,
     this.backgroundColor = Colors.transparent,
+    this.progressBarColor,
     this.alt,
     this.poster,
     this.loading,
@@ -496,6 +497,10 @@ class O3DModelViewer extends StatefulWidget {
   /// The backgroundColor of the [O3DModelViewer]'s WebView.
   /// Defaults to [Colors.transparent].
   final Color backgroundColor;
+
+  /// The progressBarColor of the [O3DModelViewer]'s default loading progress bar.
+  /// Defaults to [Colors.grey].
+  final Color? progressBarColor;
 
   // Augmented Related CSS
 

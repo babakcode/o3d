@@ -1,7 +1,6 @@
 part of '../app/o3d.dart';
 
 class O3DController implements O3DControllerInterface {
-
   late O3dDataSource _dataSource;
 
   @override
@@ -43,4 +42,20 @@ class O3DController implements O3DControllerInterface {
 
   @override
   void play({int? repetitions}) => _dataSource.play(repetitions: repetitions);
+
+  @override
+  Future<List<String>> availableVariants() => _dataSource.availableVariants();
+
+  @override
+  Future executeCustomJsCodeWithResult(String code) =>
+      _dataSource.executeCustomJsCodeWithResult(code);
+
+  @override
+  void resetCameraOrbit() => _dataSource.resetCameraOrbit();
+
+  @override
+  void resetCameraTarget() => _dataSource.resetCameraTarget();
+
+  @override
+  void resetAnimation() => _dataSource.resetAnimation();
 }

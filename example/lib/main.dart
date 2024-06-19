@@ -44,6 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> logs = [];
   bool cameraControls = false;
 
+  List<String>? availableVariants;
+  List<String>? availableAnimations;
+
   @override
   void initState() {
     super.initState();
@@ -87,20 +90,41 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Text('Default'),
                 ),
                 FilledButton(
+                  onPressed: () => controller.variantName = 'beach',
+                  child: const Text('beach'),
+                ),
+                FilledButton(
                   onPressed: () => controller.variantName = 'street',
                   child: const Text('street'),
                 ),
                 FilledButton(
-                  onPressed: () => controller.variantName = 'beach',
-                  child: const Text('beach'),
+                  onPressed: () {
+                    controller.availableVariants().then((value) {
+                      setState(() {
+                        availableVariants = value;
+                      });
+                    });
+                  },
+                  child: const Text('available variants'),
                 ),
+                if (availableVariants != null)
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: availableVariants!.length,
+                    itemBuilder: (context, index) {
+                      String variant = availableVariants![index];
+                      return Text('variant $index is $variant');
+                    },
+                  )
               ],
               o3d: O3D(
                 controller: controller,
+                progressBarColor: Colors.red,
                 src: 'assets/glb/materials_variants_shoe.glb',
                 // variantName: 'street',
               ),
             ),
+
             const Divider(),
 
             /// model 2
@@ -124,10 +148,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 FilledButton(
                   onPressed: () async {
-                    log("Available animations: ${await controller2.availableAnimations()}");
+                    controller2.availableAnimations().then((value) {
+                      setState(() {
+                        availableAnimations = value;
+                        log("Available animations: $value");
+                      });
+                    });
                   },
                   child: const Text('available animations'),
                 ),
+                if (availableAnimations != null)
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: availableAnimations!.length,
+                    itemBuilder: (context, index) {
+                      String animation = availableAnimations![index];
+                      return Text('animation $index is $animation');
+                    },
+                  )
               ],
               o3d: O3D(
                 controller: controller2,

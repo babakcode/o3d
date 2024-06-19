@@ -50,4 +50,20 @@ class O3dDataSource implements O3DControllerInterface {
 
   @override
   void play({int? repetitions}) => _o3dImp.play(repetitions: repetitions);
+
+  @override
+  Future<List<String>> availableVariants() => _o3dImp.availableVariants();
+
+  @override
+  Future executeCustomJsCodeWithResult(String code) =>
+      _o3dImp.executeCustomJsCodeWithResult(code);
+
+  @override
+  void resetCameraOrbit() => _o3dImp.resetCameraOrbit();
+
+  @override
+  void resetCameraTarget() => _o3dImp.resetCameraTarget();
+
+  @override
+  void resetAnimation() => _o3dImp.resetAnimation();
 }

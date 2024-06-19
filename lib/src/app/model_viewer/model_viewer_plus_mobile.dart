@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert' show utf8;
 import 'dart:io' show File, HttpServer, HttpStatus, InternetAddress, Platform;
-import 'package:android_intent_plus/android_intent.dart' as android_content;
+import 'package:android_intent_plus/android_intent.dart' as android_intent;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -118,6 +118,8 @@ class ModelViewerState extends State<O3DModelViewer> {
       scale: widget.scale,
       // CSS Styles
       backgroundColor: widget.backgroundColor,
+      // Default progress bar color
+      progressBarColor: widget.progressBarColor,
       // Annotations CSS
       minHotspotOpacity: widget.minHotspotOpacity,
       maxHotspotOpacity: widget.maxHotspotOpacity,
@@ -186,7 +188,7 @@ class ModelViewerState extends State<O3DModelViewer> {
             } else {
               fileURL = p.joinAll([_proxyURL, 'model']);
             }
-            final intent = android_content.AndroidIntent(
+            final intent = android_intent.AndroidIntent(
               action: 'android.intent.action.VIEW',
               // Intent.ACTION_VIEW
               // See https://developers.google.com/ar/develop/scene-viewer#3d-or-ar
@@ -239,6 +241,20 @@ class ModelViewerState extends State<O3DModelViewer> {
 
       widget.controller?.logger?.call('init proxy start');
 
+      /// todo: change proxy
+      ///
+      ///
+      // Android considers localhost as 10.0.2.2 - automatically handle this for users.
+      // if (defaultTargetPlatform == TargetPlatform.android && !kIsWeb) {
+      //   if (mappedOrigin.startsWith('http://localhost')) {
+      //     mappedOrigin =
+      //         mappedOrigin.replaceFirst('http://localhost', 'http://10.0.2.2');
+      //   } else if (mappedOrigin.startsWith('http://127.0.0.1')) {
+      //     mappedOrigin =
+      //         mappedOrigin.replaceFirst('http://127.0.0.1', 'http://10.0.2.2');
+      //   }
+      // }
+      ///
       final url = Uri.parse(src);
       _proxy = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
 
@@ -375,7 +391,7 @@ class ModelViewerState extends State<O3DModelViewer> {
     try {
       final code = await rootBundle.load(path);
 
-      return code.buffer.asUint8List();
+      return code.buffer.asUint8List(code.offsetInBytes, code.lengthInBytes);
     } catch (e) {
       widget.controller?.logger?.call('error in _readAsset: $e');
       return null;
