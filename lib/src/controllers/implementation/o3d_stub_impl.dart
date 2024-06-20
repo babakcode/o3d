@@ -69,13 +69,15 @@ class O3dImp implements O3DControllerInterface {
 
   @override
   Future<List<String>> availableAnimations() async {
-    var res =
-        await executeCustomJsCodeWithResult('$model.availableAnimations;');
+    var res = await executeCustomJsCodeWithResult('$model.availableAnimations;');
 
     if (res is! String) {
       return [];
     }
-    res = Utils.tupleToList(res);
+    res = Utils.fixJsonIssue(res);
+    if(res == null){
+      return [];
+    }
     return jsonDecode(res).cast<String>();
   }
 
@@ -94,7 +96,10 @@ class O3dImp implements O3DControllerInterface {
     if (res is! String) {
       return [];
     }
-    res = Utils.tupleToList(res);
+    res = Utils.fixJsonIssue(res);
+    if(res == null){
+      return [];
+    }
     return jsonDecode(res).cast<String>();
   }
 
