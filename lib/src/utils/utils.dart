@@ -16,55 +16,53 @@ customEvaluateWithResult$id = (code) => { return eval(code) }
 
   /// Covert tuple string to list
   /// [fixJsonIssue]
-  static String? fixJsonIssue(String str, [bool normalAttempts = true]){
-    try{
-      if(normalAttempts){
+  static String? fixJsonIssue(String str, [bool normalAttempts = true]) {
+    try {
+      if (normalAttempts) {
         /// check can decode
         jsonDecode(str.trim());
         return str;
       }
 
-      if(str.startsWith('(')){
+      if (str.startsWith('(')) {
         /// this is a set
-        final kv = str.substring(0,str.length-1).substring(1).split(',');
+        final kv = str.substring(0, str.length - 1).substring(1).split(',');
         final List<String> pairs = [];
 
-        for (int i=0; i < kv.length;i++){
+        for (int i = 0; i < kv.length; i++) {
           final thisKV = kv[i].replaceAll('"', '');
           pairs.add(thisKV.trim());
         }
 
         return json.encode(pairs);
-      }
-      else if(str.startsWith('[')){
+      } else if (str.startsWith('[')) {
         /// this is a List
 
-        final kv = str.substring(0,str.length-1).substring(1).split(',');
+        final kv = str.substring(0, str.length - 1).substring(1).split(',');
         final List<String> pairs = [];
 
-        for (int i=0; i < kv.length;i++){
+        for (int i = 0; i < kv.length; i++) {
           final thisKV = kv[i].replaceAll('"', '');
           pairs.add(thisKV.trim());
         }
 
         return json.encode(pairs);
-      }
-      else if(str.startsWith('{')){
+      } else if (str.startsWith('{')) {
         /// this is a Map
 
-        final kv = str.substring(0,str.length-1).substring(1).split(',');
+        final kv = str.substring(0, str.length - 1).substring(1).split(',');
         final Map<String, String> pairs = {};
 
-        for (int i=0; i < kv.length;i++){
+        for (int i = 0; i < kv.length; i++) {
           final thisKV = kv[i].split(":");
-          pairs[thisKV[0].replaceAll('"', '').trim()] = thisKV[1].replaceAll('"', '').trim();
+          pairs[thisKV[0].replaceAll('"', '').trim()] =
+              thisKV[1].replaceAll('"', '').trim();
         }
 
         return json.encode(pairs);
       }
-
-    }catch(e){
-      if(normalAttempts){
+    } catch (e) {
+      if (normalAttempts) {
         return fixJsonIssue(str, false);
       }
     }
