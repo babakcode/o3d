@@ -1,3 +1,7 @@
+## 3.1.2-dev-1
+
+* fix availableAnimations issue
+
 ## 3.1.1
 
 * ### new features
