@@ -1,4 +1,4 @@
-library o3d;
+library;
 
 export './src/app/channels/javascript_channel.dart';
 export './src/app/enums.dart';
