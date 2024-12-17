@@ -1,6 +1,8 @@
 name: o3d
 description: The Flutter 3D objects easy controller ( glb format ) on mobile and web platforms
+
 version: 3.1.2
+
 homepage: https://github.com/babakcode/o3d
 topics:
   - "model"
@@ -10,9 +12,9 @@ topics:
   - "model3d"
 
 screenshots:
-  - description: 'Examples of the o3d package.'
+  - description: "Examples of the o3d package."
     path: example/screenshots/s1.png
-  - description: 'Examples of the o3d package.'
+  - description: "Examples of the o3d package."
     path: example/screenshots/s2.png
 
 platforms:
@@ -21,7 +23,7 @@ platforms:
   web:
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -30,22 +32,21 @@ dependencies:
     sdk: flutter
   path: ^1.9.0
   url_launcher: ^6.2.6
-  web: ^0.5.1
-  webview_flutter: ^4.8.0
-  webview_flutter_android: ^3.16.0
-  webview_flutter_wkwebview: ^3.13.0
+  web: ^1.0.0
+  webview_flutter: ^4.10.0
+  webview_flutter_android: ^4.1.0
+  webview_flutter_wkwebview: ^3.16.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # To add assets to your package, add an assets section, like this:
   assets:
-   - assets/
+    - assets/
