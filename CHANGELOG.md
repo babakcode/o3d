@@ -1,3 +1,9 @@
+## 3.1.3
+
+* Upgrade dependencies 
+* Upgrade Kotlin version from 1.7.10 to 1.9.0 
+* Add machine local auto-generated files to .gitignore
+
 ## 3.1.2
 
 * fixed availableAnimations issue
