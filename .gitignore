@@ -31,3 +31,5 @@ build/
 .flutter-plugins
 .flutter-plugins-dependencies
 /android/local.properties
+
+!/example/linux/flutter/ephemeral/.plugin_symlinks/url_launcher_linux
